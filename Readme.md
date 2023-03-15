@@ -9,7 +9,7 @@
 This example demonstrates how to use the [Spreadsheet Document API](https://documentation.devexpress.com/OfficeFileAPI/14912/Spreadsheet-Document-API) to programmatically manage charts in worksheets.
 The application includes the RichEditControl used to display and edit the code. The code modifies the spreadsheet document loaded into the [Workbook](https://docs.devexpress.com/OfficeFileAPI/DevExpress.Spreadsheet.Workbook) instance. To see the results, click the button to open the document in Microsoft Excel.
 
-You can modify the code and watch the result. If an error occurs during compilation or execution, the backcolor of the code window changes.<
+You can modify the code and watch the result. If an error occurs during compilation or execution, the backcolor of the code window changes.
 
 > **Note:**
 >
