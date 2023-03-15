@@ -3,8 +3,19 @@
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/T132724)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
-<!-- default file list -->
-*Files to look at*:
+
+# Spreadsheet Document API - Manage Charts and Sparklines in Code
+
+This example demonstrates how to use the [Spreadsheet Document API](https://documentation.devexpress.com/OfficeFileAPI/14912/Spreadsheet-Document-API) to programmatically manage charts in worksheets.
+The application includes the RichEditControl used to display and edit the code. The code modifies the spreadsheet document loaded into the [Workbook](https://docs.devexpress.com/OfficeFileAPI/DevExpress.Spreadsheet.Workbook) instance. To see the results, click the button to open the document in Microsoft Excel.
+
+You can modify the code and watch the result. If an error occurs during compilation or execution, the backcolor of the code window changes.<
+
+> **Note:**
+>
+> The **Universal Subscription** or an additional **Office File API Subscription** is required to use this example in production code. Please refer to the following page for pricing information: [DevExpress Subscription](https://www.devexpress.com/Buy/NET/)
+
+## Files to Look At
 
 * [AxesActions.cs](./CS/SpreadsheetDocServerChartAPISamples/CodeExamples/AxesActions.cs) (VB: [AxesActions1.vb](./VB/SpreadsheetDocServerChartAPISamples/CodeExamples/AxesActions1.vb))
 * [AxesActions1.cs](./CS/SpreadsheetDocServerChartAPISamples/CodeExamples/AxesActions1.cs) (VB: [AxesActions1.vb](./VB/SpreadsheetDocServerChartAPISamples/CodeExamples/AxesActions1.vb))
@@ -21,8 +32,8 @@
 * [TrendlineActions.cs](./CS/SpreadsheetDocServerChartAPISamples/CodeExamples/TrendlineActions.cs) (VB: [TrendlineActions.vb](./VB/SpreadsheetDocServerChartAPISamples/CodeExamples/TrendlineActions.vb))
 * [ViewOptionsActions.cs](./CS/SpreadsheetDocServerChartAPISamples/CodeExamples/ViewOptionsActions.cs) (VB: [ViewOptionsActions1.vb](./VB/SpreadsheetDocServerChartAPISamples/CodeExamples/ViewOptionsActions1.vb))
 * [ViewOptionsActions1.cs](./CS/SpreadsheetDocServerChartAPISamples/CodeExamples/ViewOptionsActions1.cs) (VB: [ViewOptionsActions1.vb](./VB/SpreadsheetDocServerChartAPISamples/CodeExamples/ViewOptionsActions1.vb))
-<!-- default file list end -->
-# Spreadsheet Document API - Manage Charts and Sparklines in Code
 
+## Documentation
 
-This example demonstrates how to use the <a href="https://documentation.devexpress.com/OfficeFileAPI/14912/Spreadsheet-Document-API">Spreadsheet Document API</a> to programmatically manage charts in worksheets.<br>The application includes the RichEditControl used to display and edit the code. The code modifies the spreadsheet document loaded into the <a href="https://documentation.devexpress.com/OfficeFileAPI/DevExpress.Spreadsheet.Workbook.class">Workbook</a> instance. To see the results, open the document in Microsoft Excel by clicking the button.<br>You can modify the code and watch the result. If an error occurs during compilation or execution, the backcolor of the code window changes.<br><br><strong>Starting from v2015 vol.1:</strong><br>- Insert and modify sparklines<br><br>The<strong> Universal Subscription</strong> or an additional <strong>Office File API Subscription</strong> is required to use this example in production code. Please refer to the <a href="https://www.devexpress.com/Buy/NET/">DevExpress Subscription</a> page for pricing information.
+* [Spreadsheet Charts](https://docs.devexpress.com/OfficeFileAPI/120427/spreadsheet-document-api/charts-and-graphics/charting)
+* [Spreadsheet Chart Examples](https://docs.devexpress.com/OfficeFileAPI/113732/spreadsheet-document-api/examples/charts)
