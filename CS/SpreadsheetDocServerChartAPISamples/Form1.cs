@@ -103,7 +103,7 @@ namespace SpreadsheetChartAPISamples
             examples[5].Groups.Add(new SpreadsheetExample("Protect the Chart", ProtectionActions.ProtectChartAction));
 
             // Add nodes to the "Chart Series" group of examples.
-            examples[].Groups.Add(new SpreadsheetExample("Change Series Type", SeriesActions.ChangeSeriesTypeAction));
+            examples[6].Groups.Add(new SpreadsheetExample("Change Series Type", SeriesActions.ChangeSeriesTypeAction));
             examples[6].Groups.Add(new SpreadsheetExample("Change Series Order", SeriesActions.ChangeSeriesOrderAction));
             examples[6].Groups.Add(new SpreadsheetExample("Change Series Arguments", SeriesActions.ChangeSeriesArgumentsAction));
             examples[6].Groups.Add(new SpreadsheetExample("Use Secondary Axes", SeriesActions.UseSecondaryAxesAction));
