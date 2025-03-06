@@ -1,10 +1,23 @@
-﻿using DevExpress.Spreadsheet;
+﻿using DevExpress.Charts.Model;
+using DevExpress.Spreadsheet;
 using DevExpress.Spreadsheet.Charts;
+using System;
 
 namespace SpreadsheetChartAPIActions
 {
     public static class AxesActions
     {
+        public static Action<Workbook> MinAndMaxValuesAction = MinAndMaxValues;
+        public static Action<Workbook> MajorUnitsAction = MajorUnits;
+        public static Action<Workbook> MajorAndMinorGridlinesAction = MajorAndMinorGridlines;
+        public static Action<Workbook> LabelsNumberFormatAction = LabelsNumberFormat;
+        public static Action<Workbook> HideTickMarksAction = HideTickMarks;
+        public static Action<Workbook> HideAxisLineAction = HideAxisLine;
+        public static Action<Workbook> PositionAction = Position;
+        public static Action<Workbook> OrientationAction = Orientation;
+        public static Action<Workbook> LogScaleAction = LogScale;
+        public static Action<Workbook> DisplayUnitsAction = DisplayUnits;
+
         static void MinAndMaxValues(Workbook workbook)
         {
             #region #MinAndMaxValues
@@ -25,7 +38,6 @@ namespace SpreadsheetChartAPIActions
 
             // Hide the legend.
             chart.Legend.Visible = false;
-
             #endregion #MinAndMaxValues
         }
 
@@ -47,7 +59,6 @@ namespace SpreadsheetChartAPIActions
 
             // Hide the legend.
             chart.Legend.Visible = false;
-
             #endregion #MajorUnits
         }
 
@@ -69,7 +80,6 @@ namespace SpreadsheetChartAPIActions
 
             // Hide the legend.
             chart.Legend.Visible = false;
-
             #endregion #MajorAndMinorGridlines
         }
 
@@ -91,7 +101,6 @@ namespace SpreadsheetChartAPIActions
 
             // Hide the legend.
             chart.Legend.Visible = false;
-
             #endregion #LabelsNumberFormat
         }
 
@@ -114,7 +123,6 @@ namespace SpreadsheetChartAPIActions
 
             // Hide the legend.
             chart.Legend.Visible = false;
-
             #endregion #HideTickMarks
         }
 
@@ -134,7 +142,6 @@ namespace SpreadsheetChartAPIActions
 
             // Hide the legend.
             chart.Legend.Visible = false;
-
             #endregion #HideAxisLine
         }
 
@@ -154,7 +161,6 @@ namespace SpreadsheetChartAPIActions
 
             // Hide the legend.
             chart.Legend.Visible = false;
-
             #endregion #AxisPosition
         }
 
@@ -174,7 +180,6 @@ namespace SpreadsheetChartAPIActions
 
             // Hide the legend.
             chart.Legend.Visible = false;
-
             #endregion #AxisOrientation
         }
 
@@ -195,8 +200,39 @@ namespace SpreadsheetChartAPIActions
 
             // Set the position of the legend on the chart.
             chart.Legend.Position = LegendPosition.Bottom;
-
             #endregion #LogScale
+        }
+        
+        static void DisplayUnits(Workbook workbook)
+        {
+            #region #DisplayUnits
+            Worksheet worksheet = workbook.Worksheets["chartTask7"];
+            workbook.Worksheets.ActiveWorksheet = worksheet;
+
+            // Create a chart and specify its location.
+            Chart chart = worksheet.Charts.Add(ChartType.ColumnClustered, worksheet["B2:C8"]);
+            chart.TopLeftCell = worksheet.Cells["F2"];
+            chart.BottomRightCell = worksheet.Cells["N17"];
+
+            // Change the scale of the value axis.
+            AxisCollection axisCollection = chart.PrimaryAxes;
+            Axis valueAxis = axisCollection[1];
+            valueAxis.Scaling.AutoMax = false;
+            valueAxis.Scaling.Max = 8000000;
+            valueAxis.Scaling.AutoMin = false;
+            valueAxis.Scaling.Min = 0;
+
+            // Specify display units for the value axis.
+            valueAxis.DisplayUnits.UnitType = DisplayUnitType.Thousands;
+            valueAxis.DisplayUnits.ShowLabel = true;
+
+            // Set the chart style.
+            chart.Style = ChartStyle.ColorBevel;
+            chart.Views[0].VaryColors = true;
+
+            // Hide the legend.
+            chart.Legend.Visible = false;
+            #endregion #DisplayUnits
         }
     }
 }

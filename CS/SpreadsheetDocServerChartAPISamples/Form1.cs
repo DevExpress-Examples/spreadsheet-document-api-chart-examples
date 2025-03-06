@@ -36,11 +36,11 @@ namespace SpreadsheetChartAPISamples
 
         void InitData(GroupsOfSpreadsheetExamples examples)
         {
-            #region GroupNodes
+            #region GroupNodes        
+            examples.Add(new SpreadsheetNode("Chart Axes"));
             examples.Add(new SpreadsheetNode("Create Charts"));
             examples.Add(new SpreadsheetNode("Chart Data"));
             examples.Add(new SpreadsheetNode("Data Labels"));
-            examples.Add(new SpreadsheetNode("Chart Axes"));
             examples.Add(new SpreadsheetNode("Chart Legends"));
             examples.Add(new SpreadsheetNode("Protection"));
             examples.Add(new SpreadsheetNode("Chart Series"));
@@ -52,50 +52,62 @@ namespace SpreadsheetChartAPISamples
             #endregion
 
             #region ExampleNodes
+            // Add nodes to the "Axes" group of examples.
+            examples[0].Groups.Add(new SpreadsheetExample("Min and Max Values", AxesActions.MinAndMaxValuesAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Major Units", AxesActions.MajorUnitsAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Major and Minor Gridlines", AxesActions.MajorAndMinorGridlinesAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Labels Number Format", AxesActions.LabelsNumberFormatAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Hide Tick Marks", AxesActions.HideTickMarksAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Hide Axis Line", AxesActions.HideAxisLineAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Axis Position", AxesActions.PositionAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Axis Orientation", AxesActions.OrientationAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Log Scale", AxesActions.LogScaleAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Display Units", AxesActions.DisplayUnitsAction));
+
+
             // Add nodes to the "Create Charts" group of examples.
-            examples[0].Groups.Add(new SpreadsheetExample("Create Bar Chart", ChartsActions.CreateBarChartAction));
-            examples[0].Groups.Add(new SpreadsheetExample("Create Bubble Chart", ChartsActions.CreateBubbleChartAction));
-            examples[0].Groups.Add(new SpreadsheetExample("Create Column Chart", ChartsActions.CreateColumnChartAction));
-            examples[0].Groups.Add(new SpreadsheetExample("Create Complex Chart", ChartsActions.CreateComplexChartAction));
-            examples[0].Groups.Add(new SpreadsheetExample("Create Doughnut Chart", ChartsActions.CreateDoughnutChartAction));
-            examples[0].Groups.Add(new SpreadsheetExample("Create 3D Pie Chart", ChartsActions.CreatePie3dChartAction));
-            examples[0].Groups.Add(new SpreadsheetExample("Create Pie Chart", ChartsActions.CreatePieChartAction));
-            examples[0].Groups.Add(new SpreadsheetExample("Create Pie of Pie Chart", ChartsActions.CreatePieOfPieChartAction));
-            examples[0].Groups.Add(new SpreadsheetExample("Create Scatter Chart", ChartsActions.CreateScatterChartAction));
-            examples[0].Groups.Add(new SpreadsheetExample("Create Stock Chart", ChartsActions.CreateStockChartAction));
-            examples[0].Groups.Add(new SpreadsheetExample("Change Chart Type", ChartsActions.ChangeChartTypeAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Create Bar Chart", ChartsActions.CreateBarChartAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Create Bubble Chart", ChartsActions.CreateBubbleChartAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Create Column Chart", ChartsActions.CreateColumnChartAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Create Complex Chart", ChartsActions.CreateComplexChartAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Create Doughnut Chart", ChartsActions.CreateDoughnutChartAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Create 3D Pie Chart", ChartsActions.CreatePie3dChartAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Create Pie Chart", ChartsActions.CreatePieChartAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Create Pie of Pie Chart", ChartsActions.CreatePieOfPieChartAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Create Scatter Chart", ChartsActions.CreateScatterChartAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Create Stock Chart", ChartsActions.CreateStockChartAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Change Chart Type", ChartsActions.ChangeChartTypeAction));
 
             // Add nodes to the "Chart Data" group of examples.
-            examples[1].Groups.Add(new SpreadsheetExample("Change Data Reference", CreationAndDataActions.ChangeDataReferenceAction));
-            examples[1].Groups.Add(new SpreadsheetExample("Create Chart And Select Data", CreationAndDataActions.CreateChartAndSelectDataAction));
-            examples[1].Groups.Add(new SpreadsheetExample("Create Chart And Select Data Direction", CreationAndDataActions.CreateChartAndSelectDataDirectionAction));
-            examples[1].Groups.Add(new SpreadsheetExample("Create Chart From Range", CreationAndDataActions.CreateChartFromRangeAction));
-            examples[1].Groups.Add(new SpreadsheetExample("Create Chart With Complex Range", CreationAndDataActions.CreateChartWithComplexRangeAction));
-            examples[1].Groups.Add(new SpreadsheetExample("Create Chart With Literal Data", CreationAndDataActions.CreateChartWithLiteralDataAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Change Data Reference", CreationAndDataActions.ChangeDataReferenceAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Create Chart And Select Data", CreationAndDataActions.CreateChartAndSelectDataAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Create Chart And Select Data Direction", CreationAndDataActions.CreateChartAndSelectDataDirectionAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Create Chart From Range", CreationAndDataActions.CreateChartFromRangeAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Create Chart With Complex Range", CreationAndDataActions.CreateChartWithComplexRangeAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Create Chart With Literal Data", CreationAndDataActions.CreateChartWithLiteralDataAction));
 
             // Add nodes to the "Data Labels" group of examples.
-            examples[2].Groups.Add(new SpreadsheetExample("Show Data Labels", DataLabelsActions.ShowDataLabelsAction));
-            examples[2].Groups.Add(new SpreadsheetExample("Set Data Label Position", DataLabelsActions.SetDataLabelsPositionAction));
-            examples[2].Groups.Add(new SpreadsheetExample("Data Labels Per Series", DataLabelsActions.DataLabelsPerSeriesAction));
-            examples[2].Groups.Add(new SpreadsheetExample("Data Labels Per Point", DataLabelsActions.DataLabelsPerPointAction));
-            examples[2].Groups.Add(new SpreadsheetExample("Data Label Number Format", DataLabelsActions.DataLabelsNumberFormatAction));
-            examples[2].Groups.Add(new SpreadsheetExample("Data Label Separator", DataLabelsActions.DataLabelsSeparatorAction));
+            examples[3].Groups.Add(new SpreadsheetExample("Show Data Labels", DataLabelsActions.ShowDataLabelsAction));
+            examples[3].Groups.Add(new SpreadsheetExample("Set Data Label Position", DataLabelsActions.SetDataLabelsPositionAction));
+            examples[3].Groups.Add(new SpreadsheetExample("Data Labels Per Series", DataLabelsActions.DataLabelsPerSeriesAction));
+            examples[3].Groups.Add(new SpreadsheetExample("Data Labels Per Point", DataLabelsActions.DataLabelsPerPointAction));
+            examples[3].Groups.Add(new SpreadsheetExample("Data Label Number Format", DataLabelsActions.DataLabelsNumberFormatAction));
+            examples[3].Groups.Add(new SpreadsheetExample("Data Label Separator", DataLabelsActions.DataLabelsSeparatorAction));
 
             // Add nodes to the "Chart Legend" group of examples.
-            examples[3].Groups.Add(new SpreadsheetExample("Hide Legend", LegendActions.HideLegendAction));
-            examples[3].Groups.Add(new SpreadsheetExample("Set Legend Position", LegendActions.SetLegendPositionAction));
-            examples[3].Groups.Add(new SpreadsheetExample("Exclude Legend Entry", LegendActions.ExcludeLegendEntryAction));
+            examples[4].Groups.Add(new SpreadsheetExample("Hide Legend", LegendActions.HideLegendAction));
+            examples[4].Groups.Add(new SpreadsheetExample("Set Legend Position", LegendActions.SetLegendPositionAction));
+            examples[4].Groups.Add(new SpreadsheetExample("Exclude Legend Entry", LegendActions.ExcludeLegendEntryAction));
 
             // Add nodes to the "Protection" group of examples.
-            examples[4].Groups.Add(new SpreadsheetExample("Protect the Chart", ProtectionActions.ProtectChartAction));
-
+            examples[5].Groups.Add(new SpreadsheetExample("Protect the Chart", ProtectionActions.ProtectChartAction));
 
             // Add nodes to the "Chart Series" group of examples.
-            examples[5].Groups.Add(new SpreadsheetExample("Change Series Type", SeriesActions.ChangeSeriesTypeAction));
-            examples[5].Groups.Add(new SpreadsheetExample("Change Series Order", SeriesActions.ChangeSeriesOrderAction));
-            examples[5].Groups.Add(new SpreadsheetExample("Change Series Arguments", SeriesActions.ChangeSeriesArgumentsAction));
-            examples[5].Groups.Add(new SpreadsheetExample("Use Secondary Axes", SeriesActions.UseSecondaryAxesAction));
-            examples[5].Groups.Add(new SpreadsheetExample("Remove Series", SeriesActions.RemoveSeriesAction));
+            examples[].Groups.Add(new SpreadsheetExample("Change Series Type", SeriesActions.ChangeSeriesTypeAction));
+            examples[6].Groups.Add(new SpreadsheetExample("Change Series Order", SeriesActions.ChangeSeriesOrderAction));
+            examples[6].Groups.Add(new SpreadsheetExample("Change Series Arguments", SeriesActions.ChangeSeriesArgumentsAction));
+            examples[6].Groups.Add(new SpreadsheetExample("Use Secondary Axes", SeriesActions.UseSecondaryAxesAction));
+            examples[6].Groups.Add(new SpreadsheetExample("Remove Series", SeriesActions.RemoveSeriesAction));
 
             // Add nodes to the "Sparklines" group of examples.
             examples[7].Groups.Add(new SpreadsheetExample("Create a Sparkline", SparklineActions.CreateSparklineGroupsAction));
