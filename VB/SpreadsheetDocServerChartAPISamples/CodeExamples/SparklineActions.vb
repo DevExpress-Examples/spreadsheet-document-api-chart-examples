@@ -6,8 +6,14 @@ Namespace SpreadsheetChartAPIActions
     Public NotInheritable Class SparklineActions
         Private Sub New()
         End Sub
+
+        Public Shared CreateSparklineGroupsAction As Action(Of Workbook) = AddressOf CreateSparklineGroups
+        Public Shared RearrangeSparklinesAction As Action(Of Workbook) = AddressOf RearrangeSparklines
+        Public Shared CustomizeSparklineAppearanceAction As Action(Of Workbook) = AddressOf CustomizeSparklineAppearance
+        Public Shared SpecifyAxisSettingsAction As Action(Of Workbook) = AddressOf SpecifyAxisSettings
+
         Private Shared Sub CreateSparklineGroups(ByVal workbook As Workbook)
-            '			#Region "#CreateSparklineGroups"
+#Region "#CreateSparklineGroups"
             Dim worksheet As Worksheet = workbook.Worksheets("SparklineExamples")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -18,11 +24,11 @@ Namespace SpreadsheetChartAPIActions
 
             ' Display a column sparkline in the total cell.
             Dim totalGroup As SparklineGroup = worksheet.SparklineGroups.Add(worksheet("G8"), worksheet("C8:F8"), SparklineGroupType.Column)
-            '			#End Region ' #CreateSparklineGroups
+#End Region ' #CreateSparklineGroups
         End Sub
 
         Private Shared Sub RearrangeSparklines(ByVal workbook As Workbook)
-            '			#Region "#RearrangeSparklines"
+#Region "#RearrangeSparklines"
             Dim worksheet As Worksheet = workbook.Worksheets("SparklineExamples")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -33,11 +39,11 @@ Namespace SpreadsheetChartAPIActions
             Dim sparklineG5 As Sparkline = lineGroup.Sparklines(1)
             Dim sparklineG7 As Sparkline = lineGroup.Sparklines(3)
             Dim columnGroup As SparklineGroup = worksheet.SparklineGroups.Add(New List(Of Sparkline)(New Sparkline() {sparklineG5, sparklineG7}), SparklineGroupType.Column)
-            '			#End Region ' #RearrangeSparklines
+#End Region ' #RearrangeSparklines
         End Sub
 
         Private Shared Sub CustomizeSparklineAppearance(ByVal workbook As Workbook)
-            '			#Region "#CustomizeSparklineAppearance"
+#Region "#CustomizeSparklineAppearance"
             Dim worksheet As Worksheet = workbook.Worksheets("SparklineExamples")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -59,11 +65,11 @@ Namespace SpreadsheetChartAPIActions
             ' Highlight the highest and lowest points on each sparkline in the group.
             points.Highest.Color = Color.FromArgb(&HA9, &HD6, &H4F)
             points.Lowest.Color = Color.FromArgb(&H80, &H64, &HA2)
-            '			#End Region ' #CustomizeSparklineAppearance
+#End Region ' #CustomizeSparklineAppearance
         End Sub
 
         Private Shared Sub SpecifyAxisSettings(ByVal workbook As Workbook)
-            '			#Region "#SpecifyAxisSettings"
+#Region "#SpecifyAxisSettings"
             Dim worksheet As Worksheet = workbook.Worksheets("SparklineExamples")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -78,7 +84,7 @@ Namespace SpreadsheetChartAPIActions
             ' Set the custom maximum value for the vertical axis.
             verticalAxis.MaxScaleType = SparklineAxisScaling.Custom
             verticalAxis.MaxCustomValue = 12000
-            '			#End Region ' #SpecifyAxisSettings
+#End Region ' #SpecifyAxisSettings
         End Sub
     End Class
 End Namespace

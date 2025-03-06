@@ -1,15 +1,13 @@
 ﻿using DevExpress.Spreadsheet;
 using DevExpress.Spreadsheet.Charts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpreadsheetChartAPIActions
 {
-    public static class Protection
+    public static class ProtectionActions
     {
+        public static Action<Workbook> ProtectChartAction = ProtectChart;
+
         static void ProtectChart(Workbook workbook)
         {
             #region #ProtectChart

@@ -7,13 +7,15 @@ Imports System.Text
 Imports System.Threading.Tasks
 
 Namespace SpreadsheetChartAPIActions
-    Public NotInheritable Class Protection
+    Public NotInheritable Class ProtectionActions
 
         Private Sub New()
         End Sub
 
+        Public Shared ProtectChartAction As Action(Of Workbook) = AddressOf ProtectChart
+
         Private Shared Sub ProtectChart(ByVal workbook As Workbook)
-            '            #Region "#ProtectChart"
+#Region "#ProtectChart"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -27,8 +29,7 @@ Namespace SpreadsheetChartAPIActions
 
             ' Apply the chart protection.
             chart.Options.Protection = ChartProtection.All
-
-            '            #End Region ' #ProtectChart
+#End Region ' #ProtectChart
         End Sub
 
     End Class

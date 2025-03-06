@@ -1,19 +1,20 @@
-﻿Imports System
-Imports System.Drawing
-Imports System.Globalization
-Imports DevExpress.Spreadsheet
+﻿Imports DevExpress.Spreadsheet
 Imports DevExpress.Spreadsheet.Charts
-Imports DevExpress.Spreadsheet.Drawings
-Imports DevExpress.Utils
 
 Namespace SpreadsheetChartAPIActions
     Public NotInheritable Class CreationAndDataActions
-
         Private Sub New()
         End Sub
 
+        Public Shared CreateChartFromRangeAction As Action(Of Workbook) = AddressOf CreateChartFromRange
+        Public Shared CreateChartAndSelectDataAction As Action(Of Workbook) = AddressOf CreateChartAndSelectData
+        Public Shared CreateChartAndSelectDataDirectionAction As Action(Of Workbook) = AddressOf CreateChartAndSelectDataDirection
+        Public Shared CreateChartWithComplexRangeAction As Action(Of Workbook) = AddressOf CreateChartWithComplexRange
+        Public Shared CreateChartWithLiteralDataAction As Action(Of Workbook) = AddressOf CreateChartWithLiteralData
+        Public Shared ChangeDataReferenceAction As Action(Of Workbook) = AddressOf ChangeDataReference
+
         Private Shared Sub CreateChartFromRange(ByVal workbook As Workbook)
-            '            #Region "#CreateChartFromRange"
+#Region "#CreateChartFromRange"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask1")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -24,12 +25,11 @@ Namespace SpreadsheetChartAPIActions
 
             ' Set the chart style.
             chart.Style = ChartStyle.ColorGradient
-
-            '            #End Region ' #CreateChartFromRange
+#End Region ' #CreateChartFromRange
         End Sub
 
         Private Shared Sub CreateChartAndSelectData(ByVal workbook As Workbook)
-            '            #Region "#CreateChartAndSelectData"
+#Region "#CreateChartAndSelectData"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask2")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -40,11 +40,11 @@ Namespace SpreadsheetChartAPIActions
 
             ' Select chart data.
             chartRowData.SelectData(worksheet("B3:C8"))
-            '            #End Region ' #CreateChartAndSelectData
+#End Region ' #CreateChartAndSelectData
         End Sub
 
         Private Shared Sub CreateChartAndSelectDataDirection(ByVal workbook As Workbook)
-            '            #Region "#CreateChartAndSelectDataDirection"
+#Region "#CreateChartAndSelectDataDirection"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -63,11 +63,11 @@ Namespace SpreadsheetChartAPIActions
 
             ' Select chart data by columns.
             chartColumnData.SelectData(worksheet("B2:F6"), ChartDataDirection.Column)
-            '            #End Region ' #CreateChartAndSelectDataDirection
+#End Region ' #CreateChartAndSelectDataDirection
         End Sub
 
         Private Shared Sub CreateChartWithComplexRange(ByVal workbook As Workbook)
-            '            #Region "#CreateChartWithComplexRange"
+#Region "#CreateChartWithComplexRange"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -79,12 +79,11 @@ Namespace SpreadsheetChartAPIActions
             ' Add chart series using worksheet ranges as the data sources.
             chart.Series.Add(worksheet("D2"), worksheet("B3:B6"), worksheet("D3:D6"))
             chart.Series.Add(worksheet("F2"), worksheet("B3:B6"), worksheet("F3:F6"))
-
-            '            #End Region ' #CreateChartWithComplexRange
+#End Region ' #CreateChartWithComplexRange
         End Sub
 
         Private Shared Sub CreateChartWithLiteralData(ByVal workbook As Workbook)
-            '            #Region "#CreateChartWithLiteralData"
+#Region "#CreateChartWithLiteralData"
             Dim worksheet As Worksheet = workbook.Worksheets(0)
             workbook.Worksheets.ActiveWorksheet = worksheet
             worksheet.Columns(0).WidthInCharacters = 2.0
@@ -96,12 +95,11 @@ Namespace SpreadsheetChartAPIActions
 
             ' Add a series bound to a set of literal data.
             Dim series_of_literal As Series = chart.Series.Add(New CellValue() {"Jan", "Feb", "Mar", "Apr", "May", "Jun"}, New CellValue() {50, 100, 30, 104, 87, 150})
-
-            '            #End Region ' #CreateChartWithLiteralData
+#End Region ' #CreateChartWithLiteralData
         End Sub
 
         Private Shared Sub ChangeDataReference(ByVal workbook As Workbook)
-            '            #Region "#ChangeDataReference"
+#Region "#ChangeDataReference"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -118,8 +116,7 @@ Namespace SpreadsheetChartAPIActions
 
             ' Specify the cell that is the source for the series name.
             chart.Series(1).SeriesName.SetReference(worksheet("E2"))
-
-            '            #End Region ' #ChangeDataReference
+#End Region ' #ChangeDataReference
         End Sub
     End Class
 End Namespace

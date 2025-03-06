@@ -1,10 +1,5 @@
-﻿using System;
-using System.Drawing;
-using System.Globalization;
-using DevExpress.Spreadsheet;
+﻿using DevExpress.Spreadsheet;
 using DevExpress.Spreadsheet.Charts;
-using DevExpress.Spreadsheet.Drawings;
-using DevExpress.Utils;
 
 namespace SpreadsheetChartAPIActions
 {

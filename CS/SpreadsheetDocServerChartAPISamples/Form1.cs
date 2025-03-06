@@ -1,15 +1,8 @@
 ﻿using DevExpress.Spreadsheet;
-using DevExpress.XtraEditors;
-using DevExpress.XtraRichEdit;
-using DevExpress.XtraSpreadsheet;
-using DevExpress.XtraTab;
-using DevExpress.XtraTreeList;
-using DevExpress.XtraTreeList.Columns;
+using SpreadsheetChartAPIActions;
+using SpreadsheetDocServerChartAPISamples;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
-using System.IO;
 using System.Windows.Forms;
 
 
@@ -17,432 +10,246 @@ namespace SpreadsheetChartAPISamples
 {
     public class Form1 : Form
     {
+        #region #CreateWorkbook
+        // Create a new Workbook object.
         Workbook workbook = new Workbook();
-        CultureInfo defaultCulture = new CultureInfo("en-US");
-        //PrintableComponentLinkBase link;
-        SplitContainerControl horizontalSplitContainerControl1;
-        SplitContainerControl verticalSplitContainerControl1;
-        //IContainer components = null;
+        #endregion #CreateWorkbook
 
-        #region Controls
-
-        private TreeList treeList1;
-        private XtraTabControl xtraTabControl1;
-        private XtraTabPage xtraTabPage1;
-        private RichEditControl richEditControlCS;
-        private XtraTabPage xtraTabPage2;
-        private RichEditControl richEditControlVB;
-        #endregion
-
-        LabelControl codeExampleNameLbl;
-        ExampleCodeEditor codeEditor;
-        ExampleEvaluatorByTimer evaluator;
-        List<CodeExampleGroup> examples;
-        private SimpleButton btnOpenExcel;
-        bool treeListRootNodeLoading = true;
+        private DevExpress.XtraTreeList.TreeList treeList1;
+        private System.Windows.Forms.Button btnOpenExcel;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
 
         public Form1()
         {
             InitializeComponent();
-            string examplePath = CodeExampleDemoUtils.GetExamplePath("CodeExamples");
-
-            //string examplePath = "D:\\VB\\CS\\SpreadsheetMainDemo\\CodeExamples";
-            Dictionary<string, FileInfo> examplesCS = CodeExampleDemoUtils.GatherExamplesFromProject(examplePath, ExampleLanguage.Csharp);
-            Dictionary<string, FileInfo> examplesVB = CodeExampleDemoUtils.GatherExamplesFromProject(examplePath, ExampleLanguage.VB);
-            DisableTabs(examplesCS.Count, examplesVB.Count);
-            this.examples = CodeExampleDemoUtils.FindExamples(examplePath, examplesCS, examplesVB);
-            MergeGroups();
-            RearrangeExamples();
-            ShowExamplesInTreeList(treeList1, examples);
-
-            this.codeEditor = new ExampleCodeEditor(richEditControlCS, richEditControlVB);
-            CurrentExampleLanguage = CodeExampleDemoUtils.DetectExampleLanguage("SpreadsheetDocServerChartAPISamples");
-            this.evaluator = new SpreadsheetExampleEvaluatorByTimer(); //this.components
-
-            this.evaluator.QueryEvaluate += OnExampleEvaluatorQueryEvaluate;
-            this.evaluator.OnBeforeCompile += evaluator_OnBeforeCompile;
-            this.evaluator.OnAfterCompile += evaluator_OnAfterCompile;
-
-            ShowFirstExample();
-            this.xtraTabControl1.SelectedPageChanged += new TabPageChangedEventHandler(this.xtraTabControl1_SelectedPageChanged);
+            InitTreeListControl();
+            workbook.Options.CalculationMode = WorkbookCalculationMode.Automatic;
         }
 
-        private void MergeGroups()
+        void InitTreeListControl()
         {
-            var uniqueNameGroup = new Dictionary<string, CodeExampleGroup>();
-            foreach (CodeExampleGroup n in examples)
-                if (uniqueNameGroup.ContainsKey(n.Name))
-                {
-                    uniqueNameGroup[n.Name].Merge(n);
-                }
-                else
-                {
-                    uniqueNameGroup[n.Name] = n;
-                }
-
-            examples.Clear();
-            foreach (var value in uniqueNameGroup.Values)
-                examples.Add(value);
+            GroupsOfSpreadsheetExamples examples = new GroupsOfSpreadsheetExamples();
+            InitData(examples);
+            DataBinding(examples);
         }
 
-        void RearrangeExamples()
+        void InitData(GroupsOfSpreadsheetExamples examples)
         {
-            for (int i = 0; i < examples.Count; i++)
-            {
-                CodeExampleGroup group = examples[i];
-                if (group.Name == "Charts")
-                {
-                    examples.RemoveAt(i);
-                    examples.Insert(0, group);
-                    break;
-                }
-            }
-            for (int i = 0; i < examples.Count; i++)
-            {
-                CodeExampleGroup group = examples[i];
-                if (group.Name.StartsWith("Creation"))
-                {
-                    examples.RemoveAt(i);
-                    examples.Insert(1, group);
-                    break;
-                }
-            }
-
-            for (int i = 0; i < examples.Count; i++)
-            {
-                CodeExampleGroup group = examples[i];
-                if (group.Name.StartsWith("Sparkline"))
-                {
-                    examples.RemoveAt(i);
-                    examples.Insert(examples.Count, group);
-                    break;
-                }
-            }
-        }
-
-        void evaluator_OnAfterCompile(object sender, OnAfterCompileEventArgs args)
-        {
-            codeEditor.AfterCompile(args.Result);
-            workbook.Worksheets.ActiveWorksheet.Visible = true;
-            workbook.EndUpdate();
-        }
-
-        void evaluator_OnBeforeCompile(object sender, EventArgs e)
-        {
-            workbook.BeginUpdate();
-            codeEditor.BeforeCompile();
-            workbook.Options.Culture = defaultCulture;
-            bool loaded = workbook.LoadDocument("Document.xlsx");
-            Debug.Assert(loaded);
-        }
-        ExampleLanguage CurrentExampleLanguage
-        {
-            get { return (ExampleLanguage)xtraTabControl1.SelectedTabPageIndex; }
-            set
-            {
-                this.codeEditor.CurrentExampleLanguage = value;
-                xtraTabControl1.SelectedTabPageIndex = (value == ExampleLanguage.Csharp) ? 0 : 1;
-            }
-        }
-        void ShowExamplesInTreeList(TreeList treeList, List<CodeExampleGroup> examples)
-        {
-            #region InitializeTreeList
-            treeList.OptionsPrint.UsePrintStyles = true;
-            treeList.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.OnNewExampleSelected);
-            treeList.OptionsView.ShowColumns = false;
-            treeList.OptionsView.ShowIndicator = false;
-
-
-            treeList.VirtualTreeGetChildNodes += treeList_VirtualTreeGetChildNodes;
-            treeList.VirtualTreeGetCellValue += treeList_VirtualTreeGetCellValue;
+            #region GroupNodes
+            examples.Add(new SpreadsheetNode("Create Charts"));
+            examples.Add(new SpreadsheetNode("Chart Data"));
+            examples.Add(new SpreadsheetNode("Data Labels"));
+            examples.Add(new SpreadsheetNode("Chart Axes"));
+            examples.Add(new SpreadsheetNode("Chart Legends"));
+            examples.Add(new SpreadsheetNode("Protection"));
+            examples.Add(new SpreadsheetNode("Chart Series"));
+            examples.Add(new SpreadsheetNode("Sparklines"));
+            examples.Add(new SpreadsheetNode("Chart Styles"));
+            examples.Add(new SpreadsheetNode("Chart Titles"));
+            examples.Add(new SpreadsheetNode("Trendlines"));
+            examples.Add(new SpreadsheetNode("View Options"));
             #endregion
-            TreeListColumn col1 = new TreeListColumn();
-            col1.VisibleIndex = 0;
-            col1.OptionsColumn.AllowEdit = false;
-            col1.OptionsColumn.AllowMove = false;
-            col1.OptionsColumn.ReadOnly = true;
-            treeList.Columns.AddRange(new TreeListColumn[] { col1 });
 
-            treeList.DataSource = new Object();
-            treeList.ExpandAll();
+            #region ExampleNodes
+            // Add nodes to the "Create Charts" group of examples.
+            examples[0].Groups.Add(new SpreadsheetExample("Create Bar Chart", ChartsActions.CreateBarChartAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Create Bubble Chart", ChartsActions.CreateBubbleChartAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Create Column Chart", ChartsActions.CreateColumnChartAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Create Complex Chart", ChartsActions.CreateComplexChartAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Create Doughnut Chart", ChartsActions.CreateDoughnutChartAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Create 3D Pie Chart", ChartsActions.CreatePie3dChartAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Create Pie Chart", ChartsActions.CreatePieChartAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Create Pie of Pie Chart", ChartsActions.CreatePieOfPieChartAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Create Scatter Chart", ChartsActions.CreateScatterChartAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Create Stock Chart", ChartsActions.CreateStockChartAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Change Chart Type", ChartsActions.ChangeChartTypeAction));
+
+            // Add nodes to the "Chart Data" group of examples.
+            examples[1].Groups.Add(new SpreadsheetExample("Change Data Reference", CreationAndDataActions.ChangeDataReferenceAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Create Chart And Select Data", CreationAndDataActions.CreateChartAndSelectDataAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Create Chart And Select Data Direction", CreationAndDataActions.CreateChartAndSelectDataDirectionAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Create Chart From Range", CreationAndDataActions.CreateChartFromRangeAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Create Chart With Complex Range", CreationAndDataActions.CreateChartWithComplexRangeAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Create Chart With Literal Data", CreationAndDataActions.CreateChartWithLiteralDataAction));
+
+            // Add nodes to the "Data Labels" group of examples.
+            examples[2].Groups.Add(new SpreadsheetExample("Show Data Labels", DataLabelsActions.ShowDataLabelsAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Set Data Label Position", DataLabelsActions.SetDataLabelsPositionAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Data Labels Per Series", DataLabelsActions.DataLabelsPerSeriesAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Data Labels Per Point", DataLabelsActions.DataLabelsPerPointAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Data Label Number Format", DataLabelsActions.DataLabelsNumberFormatAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Data Label Separator", DataLabelsActions.DataLabelsSeparatorAction));
+
+            // Add nodes to the "Chart Legend" group of examples.
+            examples[3].Groups.Add(new SpreadsheetExample("Hide Legend", LegendActions.HideLegendAction));
+            examples[3].Groups.Add(new SpreadsheetExample("Set Legend Position", LegendActions.SetLegendPositionAction));
+            examples[3].Groups.Add(new SpreadsheetExample("Exclude Legend Entry", LegendActions.ExcludeLegendEntryAction));
+
+            // Add nodes to the "Protection" group of examples.
+            examples[4].Groups.Add(new SpreadsheetExample("Protect the Chart", ProtectionActions.ProtectChartAction));
+
+
+            // Add nodes to the "Chart Series" group of examples.
+            examples[5].Groups.Add(new SpreadsheetExample("Change Series Type", SeriesActions.ChangeSeriesTypeAction));
+            examples[5].Groups.Add(new SpreadsheetExample("Change Series Order", SeriesActions.ChangeSeriesOrderAction));
+            examples[5].Groups.Add(new SpreadsheetExample("Change Series Arguments", SeriesActions.ChangeSeriesArgumentsAction));
+            examples[5].Groups.Add(new SpreadsheetExample("Use Secondary Axes", SeriesActions.UseSecondaryAxesAction));
+            examples[5].Groups.Add(new SpreadsheetExample("Remove Series", SeriesActions.RemoveSeriesAction));
+
+            // Add nodes to the "Sparklines" group of examples.
+            examples[7].Groups.Add(new SpreadsheetExample("Create a Sparkline", SparklineActions.CreateSparklineGroupsAction));
+            examples[7].Groups.Add(new SpreadsheetExample("Customize Sparkline Appearance", SparklineActions.CustomizeSparklineAppearanceAction));
+            examples[7].Groups.Add(new SpreadsheetExample("Rearrange Sparklines", SparklineActions.RearrangeSparklinesAction));
+            examples[7].Groups.Add(new SpreadsheetExample("Specify Sparkline Axis Settings", SparklineActions.SpecifyAxisSettingsAction));
+
+            // Add nodes to the "Style" group of examples.
+            examples[8].Groups.Add(new SpreadsheetExample("Set Chart Style", StyleActions.SetChartStyleAction));
+            examples[8].Groups.Add(new SpreadsheetExample("Custom Series Color", StyleActions.CustomSeriesColorAction));
+            examples[8].Groups.Add(new SpreadsheetExample("Set Chart Font", StyleActions.SetChartFontAction));
+            examples[8].Groups.Add(new SpreadsheetExample("Set Transparency", StyleActions.TransparencyAction));
+
+            // Add nodes to the "Titles" group of examples.
+            examples[9].Groups.Add(new SpreadsheetExample("Set Title Text", TitlesActions.SetChartTitleTextAction));
+            examples[9].Groups.Add(new SpreadsheetExample("Link Title to Cell Range", TitlesActions.LinkChartTitleToCellRangeAction));
+            examples[9].Groups.Add(new SpreadsheetExample("Show Chart Title", TitlesActions.ShowChartTitleAction));
+            examples[9].Groups.Add(new SpreadsheetExample("Set Axis Title", TitlesActions.SetAxisTitleTextAction));
+            examples[9].Groups.Add(new SpreadsheetExample("Link Axis Title to Cell Range ", TitlesActions.LinkAxisTitleToCellRangeAction));
+            examples[9].Groups.Add(new SpreadsheetExample("Show Axis Title", TitlesActions.ShowAxisTitleAction));
+
+
+            // Add nodes to the "Trendlines" group of examples.
+            examples[10].Groups.Add(new SpreadsheetExample("Display Trendline", TrendlineActions.TrendlinesAction));
+            examples[10].Groups.Add(new SpreadsheetExample("Specify Trendline Label", TrendlineActions.TrendlineLabelAction));
+            examples[10].Groups.Add(new SpreadsheetExample("Customize Trendline", TrendlineActions.TrendlineCustomizationAction));
+
+            // Add nodes to the "View Options" group of examples.
+            examples[11].Groups.Add(new SpreadsheetExample("Apply Gradient To a Chart Background", ViewOptionsActions.ApplyGradientToChartBackgroundAction));
+            examples[11].Groups.Add(new SpreadsheetExample("Change Chart Appearance", ViewOptionsActions.ChangeChartAppearanceAction));
+            examples[11].Groups.Add(new SpreadsheetExample("Custom Walls And Floor", ViewOptionsActions.CustomWallsAndFloorAction));
+            examples[11].Groups.Add(new SpreadsheetExample("Specify Gap Width", ViewOptionsActions.GapWidthAction));
+            examples[11].Groups.Add(new SpreadsheetExample("Show Automatic Markers", ViewOptionsActions.ShowAutomaticMarkersAction));
+            examples[11].Groups.Add(new SpreadsheetExample("Show Custom Markers", ViewOptionsActions.ShowCustomMarkersAction));
+            examples[11].Groups.Add(new SpreadsheetExample("Smooth Lines", ViewOptionsActions.SmoothLinesAction));
+            examples[11].Groups.Add(new SpreadsheetExample("VaryColorsByPoint", ViewOptionsActions.VaryColorsByPointAction));
+            #endregion
         }
 
-        void treeList_VirtualTreeGetCellValue(object sender, VirtualTreeGetCellValueInfo args)
+        void DataBinding(GroupsOfSpreadsheetExamples examples)
         {
-            CodeExampleGroup group = args.Node as CodeExampleGroup;
-            if (group != null)
-                args.CellData = group.Name;
-
-            CodeExample example = args.Node as CodeExample;
-            if (example != null)
-                args.CellData = example.RegionName;
-        }
-
-        void treeList_VirtualTreeGetChildNodes(object sender, VirtualTreeGetChildNodesInfo args)
-        {
-            if (treeListRootNodeLoading)
-            {
-                args.Children = examples;
-                treeListRootNodeLoading = false;
-            }
-            else
-            {
-                if (args.Node == null)
-                    return;
-                CodeExampleGroup group = args.Node as CodeExampleGroup;
-                if (group != null)
-                    args.Children = group.Examples;
-            }
-        }
-        void ShowFirstExample()
-        {
+            treeList1.DataSource = examples;
             treeList1.ExpandAll();
-            if (treeList1.Nodes.Count > 0)
-                treeList1.FocusedNode = treeList1.MoveFirst().FirstNode;
+            treeList1.BestFitColumns();
         }
-        void OnNewExampleSelected(object sender, FocusedNodeChangedEventArgs e)
-        {
-            CodeExample newExample = (sender as TreeList).GetDataRecordByNode(e.Node) as CodeExample;
-            CodeExample oldExample = (sender as TreeList).GetDataRecordByNode(e.OldNode) as CodeExample;
 
-            if (newExample == null)
+
+        private void btnOpenExcel_Click(object sender, EventArgs e)
+        {
+            LoadDocumentFromFile();
+            SpreadsheetExample example = treeList1.GetDataRecordByNode(treeList1.FocusedNode) as SpreadsheetExample;
+            if (example == null)
                 return;
-
-            string exampleCode = codeEditor.ShowExample(oldExample, newExample);
-            codeExampleNameLbl.Text = CodeExampleDemoUtils.ConvertStringToMoreHumanReadableForm(newExample.RegionName) + " example";
-            CodeEvaluationEventArgs args = new CodeEvaluationEventArgs();
-            InitializeCodeEvaluationEventArgs(args, newExample.RegionName);
-            evaluator.ForceCompile(args);
-
+            Action<Workbook> action = example.Action;
+            action(workbook);
+            SaveDocumentToFile();
         }
-        void InitializeCodeEvaluationEventArgs(CodeEvaluationEventArgs e, string regionName)
+
+        // ------------------- Load and Save a Document -------------------
+        private void LoadDocumentFromFile()
         {
-            e.Result = true;
-            e.Code = codeEditor.CurrentCodeEditor.Text;
-            e.Language = CurrentExampleLanguage;
-            e.EvaluationParameter = workbook;
-            e.RegionName = regionName;
+            #region #LoadDocumentFromFile
+            // Load a workbook from the file.
+            workbook.LoadDocument("Document.xlsx", DocumentFormat.OpenXml);
+            #endregion #LoadDocumentFromFile
         }
-        void OnExampleEvaluatorQueryEvaluate(object sender, CodeEvaluationEventArgs e)
-        {
-            e.Result = false;
-            if (codeEditor.RichEditTextChanged)
-            {// && compileComplete) {
-                TimeSpan span = DateTime.Now - codeEditor.LastExampleCodeModifiedTime;
 
-                if (span < TimeSpan.FromMilliseconds(1000))
-                {//CompileTimeIntervalInMilliseconds  1900
-                    codeEditor.ResetLastExampleModifiedTime();
-                    return;
-                }
-                //e.Result = true;
-                InitializeCodeEvaluationEventArgs(e, e.RegionName);
-            }
+
+        private void SaveDocumentToFile()
+        {
+            #region #SaveDocumentToFile
+            // Save the modified document to the file.
+            workbook.SaveDocument("SavedDocument.xlsx", DocumentFormat.OpenXml);
+            #endregion #SaveDocumentToFile
+            Process.Start(new ProcessStartInfo("SavedDocument.xlsx") { UseShellExecute = true });
         }
-        #region InitializeComponent
+
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.horizontalSplitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
-            this.richEditControlCS = new DevExpress.XtraRichEdit.RichEditControl();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.richEditControlVB = new DevExpress.XtraRichEdit.RichEditControl();
-            this.codeExampleNameLbl = new DevExpress.XtraEditors.LabelControl();
-            this.btnOpenExcel = new DevExpress.XtraEditors.SimpleButton();
-            this.verticalSplitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.treeList1 = new DevExpress.XtraTreeList.TreeList();
-            ((System.ComponentModel.ISupportInitialize)(this.horizontalSplitContainerControl1)).BeginInit();
-            this.horizontalSplitContainerControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
-            this.xtraTabControl1.SuspendLayout();
-            this.xtraTabPage1.SuspendLayout();
-            this.xtraTabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.verticalSplitContainerControl1)).BeginInit();
-            this.verticalSplitContainerControl1.SuspendLayout();
+            this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.btnOpenExcel = new System.Windows.Forms.Button();
+            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
+            this.splitContainerControl1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // horizontalSplitContainerControl1
-            // 
-            this.horizontalSplitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.horizontalSplitContainerControl1.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
-            this.horizontalSplitContainerControl1.Horizontal = false;
-            this.horizontalSplitContainerControl1.Location = new System.Drawing.Point(0, 0);
-            this.horizontalSplitContainerControl1.Name = "horizontalSplitContainerControl1";
-            this.horizontalSplitContainerControl1.Panel1.Controls.Add(this.xtraTabControl1);
-            this.horizontalSplitContainerControl1.Panel1.Controls.Add(this.codeExampleNameLbl);
-            this.horizontalSplitContainerControl1.Panel1.Text = "Panel1";
-            this.horizontalSplitContainerControl1.Panel2.Controls.Add(this.btnOpenExcel);
-            this.horizontalSplitContainerControl1.Panel2.Text = "Panel2";
-            this.horizontalSplitContainerControl1.Size = new System.Drawing.Size(945, 655);
-            this.horizontalSplitContainerControl1.SplitterPosition = 69;
-            this.horizontalSplitContainerControl1.TabIndex = 2;
-            this.horizontalSplitContainerControl1.Text = "splitContainerControl1";
-            // 
-            // xtraTabControl1
-            // 
-            this.xtraTabControl1.AppearancePage.PageClient.BackColor = System.Drawing.Color.Transparent;
-            this.xtraTabControl1.AppearancePage.PageClient.BackColor2 = System.Drawing.Color.Transparent;
-            this.xtraTabControl1.AppearancePage.PageClient.BorderColor = System.Drawing.Color.Transparent;
-            this.xtraTabControl1.AppearancePage.PageClient.Options.UseBackColor = true;
-            this.xtraTabControl1.AppearancePage.PageClient.Options.UseBorderColor = true;
-            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl1.HeaderAutoFill = DevExpress.Utils.DefaultBoolean.True;
-            this.xtraTabControl1.Location = new System.Drawing.Point(0, 44);
-            this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(945, 537);
-            this.xtraTabControl1.TabIndex = 11;
-            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage1,
-            this.xtraTabPage2});
-            // 
-            // xtraTabPage1
-            // 
-            this.xtraTabPage1.Appearance.HeaderActive.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.xtraTabPage1.Appearance.HeaderActive.Options.UseFont = true;
-            this.xtraTabPage1.Controls.Add(this.richEditControlCS);
-            this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(939, 509);
-            this.xtraTabPage1.Text = "C#";
-            // 
-            // richEditControlCS
-            // 
-            this.richEditControlCS.ActiveViewType = DevExpress.XtraRichEdit.RichEditViewType.Draft;
-            this.richEditControlCS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richEditControlCS.EnableToolTips = true;
-            this.richEditControlCS.Location = new System.Drawing.Point(0, 0);
-            this.richEditControlCS.Name = "richEditControlCS";
-            this.richEditControlCS.Options.Comments.ShowAllAuthors = false;
-            this.richEditControlCS.Options.CopyPaste.MaintainDocumentSectionSettings = false;
-            this.richEditControlCS.Options.Fields.UseCurrentCultureDateTimeFormat = false;
-            this.richEditControlCS.Options.HorizontalRuler.Visibility = DevExpress.XtraRichEdit.RichEditRulerVisibility.Hidden;
-            this.richEditControlCS.Options.MailMerge.KeepLastParagraph = false;
-            this.richEditControlCS.Size = new System.Drawing.Size(939, 509);
-            this.richEditControlCS.TabIndex = 14;
-            // 
-            // xtraTabPage2
-            // 
-            this.xtraTabPage2.Appearance.HeaderActive.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.xtraTabPage2.Appearance.HeaderActive.Options.UseFont = true;
-            this.xtraTabPage2.Controls.Add(this.richEditControlVB);
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(939, 509);
-            this.xtraTabPage2.Text = "VB";
-            // 
-            // richEditControlVB
-            // 
-            this.richEditControlVB.ActiveViewType = DevExpress.XtraRichEdit.RichEditViewType.Draft;
-            this.richEditControlVB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richEditControlVB.EnableToolTips = true;
-            this.richEditControlVB.Location = new System.Drawing.Point(0, 0);
-            this.richEditControlVB.Name = "richEditControlVB";
-            this.richEditControlVB.Options.Comments.ShowAllAuthors = false;
-            this.richEditControlVB.Options.CopyPaste.MaintainDocumentSectionSettings = false;
-            this.richEditControlVB.Options.Fields.UseCurrentCultureDateTimeFormat = false;
-            this.richEditControlVB.Options.HorizontalRuler.Visibility = DevExpress.XtraRichEdit.RichEditRulerVisibility.Hidden;
-            this.richEditControlVB.Options.MailMerge.KeepLastParagraph = false;
-            this.richEditControlVB.Size = new System.Drawing.Size(939, 509);
-            this.richEditControlVB.TabIndex = 15;
-            // 
-            // codeExampleNameLbl
-            // 
-            this.codeExampleNameLbl.Appearance.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.codeExampleNameLbl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.codeExampleNameLbl.Location = new System.Drawing.Point(0, 0);
-            this.codeExampleNameLbl.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.codeExampleNameLbl.Name = "codeExampleNameLbl";
-            this.codeExampleNameLbl.Padding = new System.Windows.Forms.Padding(0, 0, 0, 12);
-            this.codeExampleNameLbl.Size = new System.Drawing.Size(72, 44);
-            this.codeExampleNameLbl.TabIndex = 10;
-            this.codeExampleNameLbl.Text = "label1";
-            // 
-            // btnOpenExcel
-            // 
-            this.btnOpenExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenExcel.Image")));
-            this.btnOpenExcel.Location = new System.Drawing.Point(12, 8);
-            this.btnOpenExcel.Name = "btnOpenExcel";
-            this.btnOpenExcel.Size = new System.Drawing.Size(182, 45);
-            this.btnOpenExcel.TabIndex = 0;
-            this.btnOpenExcel.Text = "Open in Microsoft Excel";
-            this.btnOpenExcel.Click += new System.EventHandler(this.btnOpenExcel_Click);
-            // 
-            // verticalSplitContainerControl1
-            // 
-            this.verticalSplitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.verticalSplitContainerControl1.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
-            this.verticalSplitContainerControl1.Location = new System.Drawing.Point(0, 0);
-            this.verticalSplitContainerControl1.Name = "verticalSplitContainerControl1";
-            this.verticalSplitContainerControl1.Panel1.Controls.Add(this.horizontalSplitContainerControl1);
-            this.verticalSplitContainerControl1.Panel1.Text = "Panel1";
-            this.verticalSplitContainerControl1.Panel2.Controls.Add(this.treeList1);
-            this.verticalSplitContainerControl1.Panel2.Text = "Panel2";
-            this.verticalSplitContainerControl1.Size = new System.Drawing.Size(1212, 655);
-            this.verticalSplitContainerControl1.SplitterPosition = 262;
-            this.verticalSplitContainerControl1.TabIndex = 0;
-            this.verticalSplitContainerControl1.Text = "verticalSplitContainerControl1";
             // 
             // treeList1
             // 
-            this.treeList1.Appearance.FocusedCell.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Underline);
+            this.treeList1.Appearance.FocusedCell.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.treeList1.Appearance.FocusedCell.ForeColor = System.Drawing.Color.Blue;
             this.treeList1.Appearance.FocusedCell.Options.UseFont = true;
+            this.treeList1.Appearance.FocusedCell.Options.UseForeColor = true;
+            this.treeList1.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.treeListColumn1});
             this.treeList1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeList1.Location = new System.Drawing.Point(0, 0);
             this.treeList1.Name = "treeList1";
-            this.treeList1.Size = new System.Drawing.Size(262, 655);
-            this.treeList1.TabIndex = 11;
+            this.treeList1.OptionsBehavior.Editable = false;
+            this.treeList1.OptionsView.ShowColumns = false;
+            this.treeList1.OptionsView.ShowIndicator = false;
+            this.treeList1.Size = new System.Drawing.Size(497, 638);
+            this.treeList1.TabIndex = 0;
+            // 
+            // treeListColumn1
+            // 
+            this.treeListColumn1.Caption = "Name";
+            this.treeListColumn1.FieldName = "Name";
+            this.treeListColumn1.Name = "treeListColumn1";
+            this.treeListColumn1.Visible = true;
+            this.treeListColumn1.VisibleIndex = 0;
+            this.treeListColumn1.Width = 92;
+            // 
+            // btnOpenExcel
+            // 
+            this.btnOpenExcel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnOpenExcel.Location = new System.Drawing.Point(0, 0);
+            this.btnOpenExcel.Name = "button1";
+            this.btnOpenExcel.Size = new System.Drawing.Size(497, 57);
+            this.btnOpenExcel.TabIndex = 1;
+            this.btnOpenExcel.Text = "Run";
+            this.btnOpenExcel.UseVisualStyleBackColor = true;
+            this.btnOpenExcel.Click += new System.EventHandler(this.btnOpenExcel_Click);
+            // 
+            // splitContainerControl1
+            // 
+            this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl1.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
+            this.splitContainerControl1.Horizontal = false;
+            this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerControl1.Name = "splitContainerControl1";
+            this.splitContainerControl1.Panel1.Controls.Add(this.treeList1);
+            this.splitContainerControl1.Panel1.Text = "Panel1";
+            this.splitContainerControl1.Panel2.Controls.Add(this.btnOpenExcel);
+            this.splitContainerControl1.Panel2.Text = "Panel2";
+            this.splitContainerControl1.Size = new System.Drawing.Size(497, 700);
+            this.splitContainerControl1.SplitterPosition = 57;
+            this.splitContainerControl1.TabIndex = 2;
+            this.splitContainerControl1.Text = "splitContainerControl1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1212, 655);
-            this.Controls.Add(this.verticalSplitContainerControl1);
+            this.ClientSize = new System.Drawing.Size(497, 700);
+            this.Controls.Add(this.splitContainerControl1);
             this.Name = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.horizontalSplitContainerControl1)).EndInit();
-            this.horizontalSplitContainerControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
-            this.xtraTabPage1.ResumeLayout(false);
-            this.xtraTabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.verticalSplitContainerControl1)).EndInit();
-            this.verticalSplitContainerControl1.ResumeLayout(false);
+            this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
+            this.splitContainerControl1.ResumeLayout(false);
             this.ResumeLayout(false);
-
-        }
-        #endregion
-
-        void xtraTabControl1_SelectedPageChanged(object sender, TabPageChangedEventArgs e)
-        {
-            ExampleLanguage value = (ExampleLanguage)(xtraTabControl1.SelectedTabPageIndex);
-            if (codeEditor != null)
-                this.codeEditor.CurrentExampleLanguage = value;
-        }
-        void ChartAPIModule_Disposed(object sender, EventArgs e)
-        {
-            evaluator.Dispose();
-        }
-        void DisableTabs(int examplesCSCount, int examplesVBCount)
-        {
-            if (examplesCSCount == 0)
-                xtraTabControl1.TabPages[(int)ExampleLanguage.Csharp].PageEnabled = false;
-            if (examplesVBCount == 0)
-                xtraTabControl1.TabPages[(int)ExampleLanguage.VB].PageEnabled = false;
-        }
-
-        private void btnOpenExcel_Click(object sender, EventArgs e)
-        {
-            string fileName = "SampleChart.xlsx";
-            using (Workbook tempWorkbook = new Workbook())
-            {
-                tempWorkbook.CreateNewDocument();
-                tempWorkbook.Worksheets[0].CopyFrom(workbook.Worksheets.ActiveWorksheet);
-                tempWorkbook.SaveDocument(fileName);
-                Process.Start(fileName);
-            }
         }
     }
 }
+

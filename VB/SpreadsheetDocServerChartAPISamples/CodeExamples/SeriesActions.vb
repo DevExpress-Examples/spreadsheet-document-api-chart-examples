@@ -1,10 +1,5 @@
-﻿Imports System
-Imports System.Drawing
-Imports System.Globalization
-Imports DevExpress.Spreadsheet
+﻿Imports DevExpress.Spreadsheet
 Imports DevExpress.Spreadsheet.Charts
-Imports DevExpress.Spreadsheet.Drawings
-Imports DevExpress.Utils
 
 Namespace SpreadsheetChartAPIActions
     Public NotInheritable Class SeriesActions
@@ -12,8 +7,15 @@ Namespace SpreadsheetChartAPIActions
         Private Sub New()
         End Sub
 
+        Public Shared RemoveSeriesAction As Action(Of Workbook) = AddressOf RemoveSeries
+        Public Shared ChangeSeriesOrderAction As Action(Of Workbook) = AddressOf ChangeSeriesOrder
+        Public Shared UseSecondaryAxesAction As Action(Of Workbook) = AddressOf UseSecondaryAxes
+        Public Shared ChangeSeriesTypeAction As Action(Of Workbook) = AddressOf ChangeSeriesType
+        Public Shared ChangeSeriesArgumentsAction As Action(Of Workbook) = AddressOf ChangeSeriesArguments
+
+
         Private Shared Sub RemoveSeries(ByVal workbook As Workbook)
-            '            #Region "#RemoveSeries"
+#Region "#RemoveSeries"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -24,12 +26,11 @@ Namespace SpreadsheetChartAPIActions
 
             ' Remove the series.
             chart.Series.RemoveAt(1)
-
-            '            #End Region ' #RemoveSeries
+#End Region ' #RemoveSeries
         End Sub
 
         Private Shared Sub ChangeSeriesOrder(ByVal workbook As Workbook)
-            '            #Region "#ChangeSeriesOrder"
+#Region "#ChangeSeriesOrder"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -40,12 +41,11 @@ Namespace SpreadsheetChartAPIActions
 
             ' Change the series order.
             chart.Series(1).BringForward()
-
-            '            #End Region ' #ChangeSeriesOrder
+#End Region ' #ChangeSeriesOrder
         End Sub
 
         Private Shared Sub UseSecondaryAxes(ByVal workbook As Workbook)
-            '            #Region "#UseSecondaryAxes"
+#Region "#UseSecondaryAxes"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask5")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -59,12 +59,11 @@ Namespace SpreadsheetChartAPIActions
 
             ' Specify the position of the legend.
             chart.Legend.Position = LegendPosition.Top
-
-            '            #End Region ' #UseSecondaryAxes
+#End Region ' #UseSecondaryAxes
         End Sub
 
         Private Shared Sub ChangeSeriesType(ByVal workbook As Workbook)
-            '            #Region "#ChangeSeriesType"
+#Region "#ChangeSeriesType"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask5")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -81,11 +80,10 @@ Namespace SpreadsheetChartAPIActions
 
             ' Specify the position of the legend.
             chart.Legend.Position = LegendPosition.Top
-
-            '            #End Region ' #ChangeSeriesType
+#End Region ' #ChangeSeriesType
         End Sub
         Private Shared Sub ChangeSeriesArguments(ByVal workbook As Workbook)
-            '            #Region "#ChangeSeriesArgumentsAndValues"
+#Region "#ChangeSeriesArgumentsAndValues"
             Dim worksheet As Worksheet = workbook.Worksheets("Sheet1")
             workbook.Worksheets.ActiveWorksheet = worksheet
             workbook.BeginUpdate()
@@ -98,7 +96,7 @@ Namespace SpreadsheetChartAPIActions
             chart.Series(0).Values = New CellValue() {30, 20, 10}
 
             workbook.EndUpdate()
-            '            #End Region ' #ChangeSeriesArgumentsAndValues
+#End Region ' #ChangeSeriesArgumentsAndValues
         End Sub
     End Class
 End Namespace

@@ -1,14 +1,18 @@
-﻿using System;
-using System.Drawing;
-using System.Globalization;
-using DevExpress.Spreadsheet;
+﻿using DevExpress.Spreadsheet;
 using DevExpress.Spreadsheet.Charts;
-using DevExpress.Spreadsheet.Drawings;
-using DevExpress.Utils;
+using System;
 
-namespace SpreadsheetChartAPIActions {
-    public static class SeriesActions {
-        static void RemoveSeries(Workbook workbook) {
+namespace SpreadsheetChartAPIActions
+{
+    public static class SeriesActions
+    {
+        public static Action<Workbook> RemoveSeriesAction = RemoveSeries;
+        public static Action<Workbook> ChangeSeriesOrderAction = ChangeSeriesOrder;
+        public static Action<Workbook> UseSecondaryAxesAction = UseSecondaryAxes;
+        public static Action<Workbook> ChangeSeriesTypeAction = ChangeSeriesType;
+        public static Action<Workbook> ChangeSeriesArgumentsAction = ChangeSeriesArguments;
+        static void RemoveSeries(Workbook workbook)
+        {
             #region #RemoveSeries
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -24,7 +28,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #RemoveSeries
         }
 
-        static void ChangeSeriesOrder(Workbook workbook) {
+        static void ChangeSeriesOrder(Workbook workbook)
+        {
             #region #ChangeSeriesOrder
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -40,7 +45,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #ChangeSeriesOrder
         }
 
-        static void UseSecondaryAxes(Workbook workbook) {
+        static void UseSecondaryAxes(Workbook workbook)
+        {
             #region #UseSecondaryAxes
             Worksheet worksheet = workbook.Worksheets["chartTask5"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -59,7 +65,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #UseSecondaryAxes
         }
 
-        static void ChangeSeriesType(Workbook workbook) {
+        static void ChangeSeriesType(Workbook workbook)
+        {
             #region #ChangeSeriesType
             Worksheet worksheet = workbook.Worksheets["chartTask5"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -88,9 +95,9 @@ namespace SpreadsheetChartAPIActions {
             workbook.BeginUpdate();
 
             // Create a chart.
-            Chart chart = worksheet.Charts.Add(ChartType.LineMarker, worksheet[0,0]);
+            Chart chart = worksheet.Charts.Add(ChartType.LineMarker, worksheet[0, 0]);
             // Specify arguments.
-            chart.Series[0].Arguments = new CellValue[] {1,2,3};
+            chart.Series[0].Arguments = new CellValue[] { 1, 2, 3 };
             // Specify values.
             chart.Series[0].Values = new CellValue[] { 30, 20, 10 };
 

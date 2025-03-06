@@ -6,14 +6,19 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4A0889CB-9D34-4071-A3AF-7C8D150CA9D6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <AssemblyName>SpreadsheetDocServerChartAPISamples</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName></SccProjectName>
-    <SccLocalPath></SccLocalPath>
-    <SccAuxPath></SccAuxPath>
-    <SccProvider></SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
     <OptionStrict>Off</OptionStrict>
@@ -124,14 +129,14 @@
     <Import Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects.vb" />
     <Compile Include="CodeExamples\AxesActions1.vb" />
-    <Compile Include="CodeExamples\Charts1.vb" />
     <Compile Include="CodeExamples\AxesActions.vb" />
-    <Compile Include="CodeExamples\Charts.vb" />
+    <Compile Include="CodeExamples\ChartActions.vb" />
     <Compile Include="CodeExamples\CreationAndDataActions.vb" />
     <Compile Include="CodeExamples\DataLabelsActions.vb" />
     <Compile Include="CodeExamples\LegendActions.vb" />
-    <Compile Include="CodeExamples\Protection.vb" />
+    <Compile Include="CodeExamples\ProtectionActions.vb" />
     <Compile Include="CodeExamples\SeriesActions.vb" />
     <Compile Include="CodeExamples\SparklineActions.vb" />
     <Compile Include="CodeExamples\StyleActions.vb" />
@@ -148,10 +153,10 @@
     <Compile Include="Program.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="CodeUtils\SpreadsheetExampleEvaluatorByTimer.vb" />
-    <Compile Include="CodeExamples\ViewOptionsActions1.vb" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

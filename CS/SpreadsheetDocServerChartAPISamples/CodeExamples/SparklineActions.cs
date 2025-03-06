@@ -1,4 +1,5 @@
 ﻿using DevExpress.Spreadsheet;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -6,6 +7,10 @@ namespace SpreadsheetChartAPIActions
 {
     public static class SparklineActions
     {
+        public static Action<Workbook> CreateSparklineGroupsAction = CreateSparklineGroups;
+        public static Action<Workbook> RearrangeSparklinesAction = RearrangeSparklines;
+        public static Action<Workbook> CustomizeSparklineAppearanceAction = CustomizeSparklineAppearance;
+        public static Action<Workbook> SpecifyAxisSettingsAction = SpecifyAxisSettings;
         static void CreateSparklineGroups(Workbook workbook)
         {
             #region #CreateSparklineGroups

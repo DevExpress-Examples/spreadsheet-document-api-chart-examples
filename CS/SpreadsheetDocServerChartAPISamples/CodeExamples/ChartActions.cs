@@ -1,15 +1,27 @@
-﻿using System;
-using System.Drawing;
-using System.Globalization;
-using DevExpress.Spreadsheet;
+﻿using DevExpress.Spreadsheet;
 using DevExpress.Spreadsheet.Charts;
-using DevExpress.Spreadsheet.Drawings;
-using DevExpress.Utils;
+using System;
 using System.Windows.Forms;
 
-namespace SpreadsheetChartAPIActions {
-    public static class Charts {
-        static void PieChart(Workbook workbook) {
+namespace SpreadsheetChartAPIActions
+{
+    public static class ChartsActions
+    {
+        public static Action<Workbook> CreatePieChartAction = PieChart;
+        public static Action<Workbook> CreateBarChartAction = BarChart;
+        public static Action<Workbook> CreateColumnChartAction = ColumnChart;
+        public static Action<Workbook> CreateComplexChartAction = ComplexChart;
+        public static Action<Workbook> CreateDoughnutChartAction = DoughnutChart;
+        public static Action<Workbook> CreatePie3dChartAction = Pie3dChart;
+        public static Action<Workbook> CreateScatterChartAction = ScatterChart;
+        public static Action<Workbook> CreateStockChartAction = StockChart;
+        public static Action<Workbook> CreateBubbleChartAction = BubbleChart;
+        public static Action<Workbook> CreatePieOfPieChartAction = PieOfPieChart;
+        public static Action<Workbook> ChangeChartTypeAction = ChangeChartType;
+
+
+        static void PieChart(Workbook workbook)
+        {
             #region #PieChart
             Worksheet worksheet = workbook.Worksheets["chartTask1"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -18,10 +30,10 @@ namespace SpreadsheetChartAPIActions {
             Chart chart = worksheet.Charts.Add(ChartType.PieExploded, worksheet["B2:C7"]);
             chart.TopLeftCell = worksheet.Cells["E2"];
             chart.BottomRightCell = worksheet.Cells["K15"];
-            
+
             // Set the chart style
             chart.Style = ChartStyle.ColorGradient;
-            
+
             // Hide the legend
             chart.Legend.Visible = false;
 
@@ -37,7 +49,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #PieChart
         }
 
-        static void BarChart(Workbook workbook) {
+        static void BarChart(Workbook workbook)
+        {
             #region #BarChart
             Worksheet worksheet = workbook.Worksheets["chartTask2"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -46,14 +59,14 @@ namespace SpreadsheetChartAPIActions {
             Chart chart = worksheet.Charts.Add(ChartType.BarFullStacked);
             chart.TopLeftCell = worksheet.Cells["E3"];
             chart.BottomRightCell = worksheet.Cells["K14"];
-            
+
             // Select chart data
             chart.SelectData(worksheet["B3:C8"], ChartDataDirection.Row);
 
             // Display the chart title
             chart.Title.Visible = true;
             chart.Title.SetReference(worksheet["B1"]);
-            
+
             // Change legend position
             chart.Legend.Position = LegendPosition.Bottom;
 
@@ -66,7 +79,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #BarChart
         }
 
-        static void ColumnChart(Workbook workbook) {
+        static void ColumnChart(Workbook workbook)
+        {
             #region #ColumnChart
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -75,7 +89,7 @@ namespace SpreadsheetChartAPIActions {
             Chart chart = worksheet.Charts.Add(ChartType.ColumnClustered);
             chart.TopLeftCell = worksheet.Cells["H2"];
             chart.BottomRightCell = worksheet.Cells["N14"];
-            
+
             // Add series
             chart.Series.Add(worksheet["D2"], worksheet["B3:B6"], worksheet["D3:D6"]);
             chart.Series.Add(worksheet["F2"], worksheet["B3:B6"], worksheet["F3:F6"]);
@@ -112,7 +126,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #ColumnChart
         }
 
-        static void ComplexChart(Workbook workbook) {
+        static void ComplexChart(Workbook workbook)
+        {
             #region #ComplexChart
             Worksheet worksheet = workbook.Worksheets["chartTask5"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -138,7 +153,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #ComplexChart
         }
 
-        static void DoughnutChart(Workbook workbook) {
+        static void DoughnutChart(Workbook workbook)
+        {
             #region #DoughnutChart
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -164,7 +180,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #DoughnutChart
         }
 
-        static void Pie3dChart(Workbook workbook) {
+        static void Pie3dChart(Workbook workbook)
+        {
             #region #Pie3dChart
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -189,7 +206,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #Pie3dChart
         }
 
-        static void ScatterChart(Workbook workbook) {
+        static void ScatterChart(Workbook workbook)
+        {
             #region #ScatterChart
             Worksheet worksheet = workbook.Worksheets["chartScatter"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -221,7 +239,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #ScatterChart
         }
 
-        static void StockChart(Workbook workbook) {
+        static void StockChart(Workbook workbook)
+        {
             #region #StockChart
             Worksheet worksheet = workbook.Worksheets["chartStock"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -271,7 +290,7 @@ namespace SpreadsheetChartAPIActions {
             s1.BubbleSize = ChartData.FromRange(worksheet["E3:E7"]);
             Series s2 = chart.Series.Add(worksheet["A9"], worksheet["C9:C13"], worksheet["D9:D13"]);
             s2.BubbleSize = ChartData.FromRange(worksheet["E9:E13"]);
-            
+
             // Set the chart style
             chart.Style = ChartStyle.ColorGradient;
             // Set the bubble size 1.5x relative to the default setting.
@@ -317,6 +336,26 @@ namespace SpreadsheetChartAPIActions {
                 chart.ChangeType(type2);
             }
             #endregion #ChangeChartType
+        }
+
+        static void PieOfPieChart(Workbook workbook)
+        {
+            #region #PieOfPieChart
+            Worksheet worksheet = workbook.Worksheets["chartTask6"];
+            workbook.Worksheets.ActiveWorksheet = worksheet;
+
+            // Create a Pie of Pie chart and specify its position.
+            Chart chart = worksheet.Charts.Add(ChartType.PieOfPie, worksheet["B2:C11"]);
+            chart.TopLeftCell = worksheet.Cells["E2"];
+            chart.BottomRightCell = worksheet.Cells["L16"];
+
+            // Specify the number of data points to be displayed in the secondary chart (the last four values).
+            chart.Views[0].SplitType = OfPieSplitType.Position;
+            chart.Views[0].SplitPosition = 4;
+
+            // Show data labels as percentage values.
+            chart.Views[0].DataLabels.ShowPercent = true;
+            #endregion #PieOfPieChart
         }
     }
 }

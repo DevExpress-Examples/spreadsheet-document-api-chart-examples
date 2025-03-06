@@ -12,8 +12,12 @@ Namespace SpreadsheetChartAPIActions
         Private Sub New()
         End Sub
 
+        Public Shared TrendlinesAction As Action(Of Workbook) = AddressOf Trendlines
+        Public Shared TrendlineCustomizationAction As Action(Of Workbook) = AddressOf TrendlineCustomization
+        Public Shared TrendlineLabelAction As Action(Of Workbook) = AddressOf TrendlineLabel
+
         Private Shared Sub Trendlines(ByVal workbook As Workbook)
-            '            #Region "#Trendlines"
+#Region "#Trendlines"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -28,12 +32,11 @@ Namespace SpreadsheetChartAPIActions
 
             ' Display a polynomial trendline.
             chart.Series(0).Trendlines.Add(ChartTrendlineType.Polynomial)
-
-            '            #End Region ' #Trendlines
+#End Region ' #Trendlines
         End Sub
 
         Private Shared Sub TrendlineCustomization(ByVal workbook As Workbook)
-            '            #Region "#TrendlineCustomization"
+#Region "#TrendlineCustomization"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -62,12 +65,11 @@ Namespace SpreadsheetChartAPIActions
             tline.Backward = 1
             tline.Forward = 2
             tline.Outline.SetSolidFill(Color.Red)
-
-            '            #End Region ' #TrendlineCustomization
+#End Region ' #TrendlineCustomization
         End Sub
 
         Private Shared Sub TrendlineLabel(ByVal workbook As Workbook)
-            '            #Region "#TrendlineLabel"
+#Region "#TrendlineLabel"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -94,8 +96,7 @@ Namespace SpreadsheetChartAPIActions
             tlabel.Fill.SetGradientFill(ShapeGradientType.Linear, Color.Orange, Color.White)
             ' Position the label in the right quarter of the chart area.
             tlabel.Layout.Left.SetPosition(LayoutMode.Edge, 0.75)
-
-            '            #End Region ' #TrendlineLabel
+#End Region ' #TrendlineLabel
         End Sub
     End Class
 End Namespace

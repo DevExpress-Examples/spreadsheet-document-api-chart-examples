@@ -1,14 +1,18 @@
-﻿using System;
-using System.Drawing;
-using System.Globalization;
-using DevExpress.Spreadsheet;
+﻿using DevExpress.Spreadsheet;
 using DevExpress.Spreadsheet.Charts;
-using DevExpress.Spreadsheet.Drawings;
-using DevExpress.Utils;
+using System;
+using System.Drawing;
 
-namespace SpreadsheetChartAPIActions {
-    public static class StyleActions {
-        static void SetChartStyle(Workbook workbook) {
+namespace SpreadsheetChartAPIActions
+{
+    public static class StyleActions
+    {
+        public static Action<Workbook> SetChartStyleAction = SetChartStyle;
+        public static Action<Workbook> SetChartFontAction = SetChartFont;
+        public static Action<Workbook> CustomSeriesColorAction = CustomSeriesColor;
+        public static Action<Workbook> TransparencyAction = Transparency;
+        static void SetChartStyle(Workbook workbook)
+        {
             #region #SetChartStyle
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -43,7 +47,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #SetChartFont
         }
 
-        static void CustomSeriesColor(Workbook workbook) {
+        static void CustomSeriesColor(Workbook workbook)
+        {
             #region #CustomSeriesColor
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -60,7 +65,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #CustomSeriesColor
         }
 
-        static void Transparency(Workbook workbook) {
+        static void Transparency(Workbook workbook)
+        {
             #region #Transparency
             Worksheet worksheet = workbook.Worksheets["chartTask4"];
             workbook.Worksheets.ActiveWorksheet = worksheet;

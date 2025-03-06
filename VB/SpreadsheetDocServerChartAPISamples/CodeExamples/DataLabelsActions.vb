@@ -7,13 +7,21 @@ Imports DevExpress.Spreadsheet.Drawings
 Imports DevExpress.Utils
 
 Namespace SpreadsheetChartAPIActions
-    Public NotInheritable Class DataLabelsActions
+    Public NotInheritable Class DataLabelActions
 
         Private Sub New()
         End Sub
 
+        Public Shared ShowDataLabelsAction As Action(Of Workbook) = AddressOf ShowDataLabels
+        Public Shared SetDataLabelsPositionAction As Action(Of Workbook) = AddressOf SetDataLabelsPosition
+        Public Shared DataLabelsNumberFormatAction As Action(Of Workbook) = AddressOf DataLabelsNumberFormat
+        Public Shared DataLabelsPerSeriesAction As Action(Of Workbook) = AddressOf DataLabelsPerSeries
+        Public Shared DataLabelsPerPointAction As Action(Of Workbook) = AddressOf DataLabelsPerPoint
+        Public Shared DataLabelsSeparatorAction As Action(Of Workbook) = AddressOf DataLabelsSeparator
+
+
         Private Shared Sub ShowDataLabels(ByVal workbook As Workbook)
-            '            #Region "#ShowDataLabels"
+#Region "#ShowDataLabels"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -25,11 +33,11 @@ Namespace SpreadsheetChartAPIActions
             ' Show data labels.
             chart.Views(0).DataLabels.ShowValue = True
 
-            '            #End Region ' #ShowDataLabels
+#End Region ' #ShowDataLabels
         End Sub
 
         Private Shared Sub SetDataLabelsPosition(ByVal workbook As Workbook)
-            '            #Region "#SetDataLabelsPosition"
+#Region "#SetDataLabelsPosition"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -41,12 +49,11 @@ Namespace SpreadsheetChartAPIActions
             ' Display data labels and specify their position within the chart.
             chart.Views(0).DataLabels.ShowValue = True
             chart.Views(0).DataLabels.LabelPosition = DataLabelPosition.Center
-
-            '            #End Region ' #SetDataLabelsPosition
+#End Region ' #SetDataLabelsPosition
         End Sub
 
         Private Shared Sub DataLabelsNumberFormat(ByVal workbook As Workbook)
-            '            #Region "#DataLabelsNumberFormat"
+#Region "#DataLabelsNumberFormat"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -62,12 +69,11 @@ Namespace SpreadsheetChartAPIActions
             ' Format data labels.
             chart.Views(0).DataLabels.NumberFormat.FormatCode = "0%"
             chart.Views(0).DataLabels.NumberFormat.IsSourceLinked = False
-
-            '            #End Region ' #DataLabelsNumberFormat
+#End Region ' #DataLabelsNumberFormat
         End Sub
 
         Private Shared Sub DataLabelsPerSeries(ByVal workbook As Workbook)
-            '            #Region "#DataLabelsPerSeries"
+#Region "#DataLabelsPerSeries"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -79,12 +85,11 @@ Namespace SpreadsheetChartAPIActions
             ' Display data labels for the second series.
             chart.Series(1).CustomDataLabels.ShowValue = True
             chart.Series(1).UseCustomDataLabels = True
-
-            '            #End Region ' #DataLabelsPerSeries
+#End Region ' #DataLabelsPerSeries
         End Sub
 
         Private Shared Sub DataLabelsPerPoint(ByVal workbook As Workbook)
-            '            #Region "#DataLabelsPerPoint"
+#Region "#DataLabelsPerPoint"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -96,12 +101,11 @@ Namespace SpreadsheetChartAPIActions
             ' Display the data label for the last point of the second series.
             chart.Series(1).CustomDataLabels.Add(1).ShowValue = True
             chart.Series(1).UseCustomDataLabels = True
-
-            '            #End Region ' #DataLabelsPerPoint
+#End Region ' #DataLabelsPerPoint
         End Sub
 
         Private Shared Sub DataLabelsSeparator(ByVal workbook As Workbook)
-            '            #Region "#DataLabelsSeparator"
+#Region "#DataLabelsSeparator"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask1")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -122,9 +126,7 @@ Namespace SpreadsheetChartAPIActions
             chart.Legend.Visible = False
             ' Set the angle of the first pie-chart slice.
             chart.Views(0).FirstSliceAngle = 100
-
-            '            #End Region ' #DataLabelsSeparator
+#End Region ' #DataLabelsSeparator
         End Sub
-
     End Class
 End Namespace

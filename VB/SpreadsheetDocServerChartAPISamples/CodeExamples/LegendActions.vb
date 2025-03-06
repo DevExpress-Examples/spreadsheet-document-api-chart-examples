@@ -1,10 +1,5 @@
-﻿Imports System
-Imports System.Drawing
-Imports System.Globalization
-Imports DevExpress.Spreadsheet
+﻿Imports DevExpress.Spreadsheet
 Imports DevExpress.Spreadsheet.Charts
-Imports DevExpress.Spreadsheet.Drawings
-Imports DevExpress.Utils
 
 Namespace SpreadsheetChartAPIActions
     Public NotInheritable Class LegendActions
@@ -12,8 +7,13 @@ Namespace SpreadsheetChartAPIActions
         Private Sub New()
         End Sub
 
+        Public Shared HideLegendAction As Action(Of Workbook) = AddressOf HideLegend
+        Public Shared SetLegendPositionAction As Action(Of Workbook) = AddressOf SetLegendPosition
+        Public Shared ExcludeLegendEntryAction As Action(Of Workbook) = AddressOf ExcludeLegendEntry
+
+
         Private Shared Sub HideLegend(ByVal workbook As Workbook)
-            '            #Region "#HideLegend"
+#Region "#HideLegend"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -25,11 +25,11 @@ Namespace SpreadsheetChartAPIActions
             ' Hide the legend.
             chart.Legend.Visible = False
 
-            '            #End Region ' #HideLegend
+#End Region ' #HideLegend
         End Sub
 
         Private Shared Sub SetLegendPosition(ByVal workbook As Workbook)
-            '            #Region "#SetLegendPosition"
+#Region "#SetLegendPosition"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -41,11 +41,11 @@ Namespace SpreadsheetChartAPIActions
             ' Specify the position of the legend.
             chart.Legend.Position = LegendPosition.Bottom
 
-            '            #End Region ' #SetLegendPosition
+#End Region ' #SetLegendPosition
         End Sub
 
         Private Shared Sub ExcludeLegendEntry(ByVal workbook As Workbook)
-            '            #Region "#ExcludeLegendEntry"
+#Region "#ExcludeLegendEntry"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -57,8 +57,7 @@ Namespace SpreadsheetChartAPIActions
             ' Exclude entries from the legend.
             chart.Legend.CustomEntries.Add(2).Hidden = True
             chart.Legend.CustomEntries.Add(3).Hidden = True
-
-            '            #End Region ' #ExcludeLegendEntry
+#End Region ' #ExcludeLegendEntry
         End Sub
     End Class
 End Namespace

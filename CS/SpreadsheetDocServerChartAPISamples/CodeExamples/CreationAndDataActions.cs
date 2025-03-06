@@ -1,14 +1,21 @@
-﻿using System;
-using System.Drawing;
-using System.Globalization;
-using DevExpress.Spreadsheet;
+﻿using DevExpress.Spreadsheet;
 using DevExpress.Spreadsheet.Charts;
-using DevExpress.Spreadsheet.Drawings;
-using DevExpress.Utils;
+using System;
 
-namespace SpreadsheetChartAPIActions {
-    public static class CreationAndDataActions {
-        static void CreateChartFromRange(Workbook workbook) {
+namespace SpreadsheetChartAPIActions
+{
+    public static class CreationAndDataActions
+    {
+
+        public static Action<Workbook> CreateChartFromRangeAction = CreateChartFromRange;
+        public static Action<Workbook> CreateChartAndSelectDataAction = CreateChartAndSelectData;
+        public static Action<Workbook> CreateChartAndSelectDataDirectionAction = CreateChartAndSelectDataDirection;
+        public static Action<Workbook> CreateChartWithComplexRangeAction = CreateChartWithComplexRange;
+        public static Action<Workbook> CreateChartWithLiteralDataAction = CreateChartWithLiteralData;
+        public static Action<Workbook> ChangeDataReferenceAction = ChangeDataReference;
+
+        static void CreateChartFromRange(Workbook workbook)
+        {
             #region #CreateChartFromRange
             Worksheet worksheet = workbook.Worksheets["chartTask1"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -40,7 +47,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #CreateChartAndSelectData
         }
 
-        static void CreateChartAndSelectDataDirection(Workbook workbook) {
+        static void CreateChartAndSelectDataDirection(Workbook workbook)
+        {
             #region #CreateChartAndSelectDataDirection
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -63,7 +71,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #CreateChartAndSelectDataDirection
         }
 
-        static void CreateChartWithComplexRange(Workbook workbook) {
+        static void CreateChartWithComplexRange(Workbook workbook)
+        {
             #region #CreateChartWithComplexRange
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -80,7 +89,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #CreateChartWithComplexRange
         }
 
-        static void CreateChartWithLiteralData(Workbook workbook) {
+        static void CreateChartWithLiteralData(Workbook workbook)
+        {
             #region #CreateChartWithLiteralData
             Worksheet worksheet = workbook.Worksheets[0];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -99,7 +109,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #CreateChartWithLiteralData
         }
 
-        static void ChangeDataReference(Workbook workbook) {
+        static void ChangeDataReference(Workbook workbook)
+        {
             #region #ChangeDataReference
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;

@@ -1,14 +1,20 @@
-﻿using System;
-using System.Drawing;
-using System.Globalization;
-using DevExpress.Spreadsheet;
+﻿using DevExpress.Spreadsheet;
 using DevExpress.Spreadsheet.Charts;
-using DevExpress.Spreadsheet.Drawings;
-using DevExpress.Utils;
+using System;
 
-namespace SpreadsheetChartAPIActions {
-    public static class DataLabelsActions {
-        static void ShowDataLabels(Workbook workbook) {
+namespace SpreadsheetChartAPIActions
+{
+    public static class DataLabelsActions
+    {
+        public static Action<Workbook> ShowDataLabelsAction = ShowDataLabels;
+        public static Action<Workbook> SetDataLabelsPositionAction = SetDataLabelsPosition;
+        public static Action<Workbook> DataLabelsNumberFormatAction = DataLabelsNumberFormat;
+        public static Action<Workbook> DataLabelsPerSeriesAction = DataLabelsPerSeries;
+        public static Action<Workbook> DataLabelsPerPointAction = DataLabelsPerPoint;
+        public static Action<Workbook> DataLabelsSeparatorAction = DataLabelsSeparator;
+
+        static void ShowDataLabels(Workbook workbook)
+        {
             #region #ShowDataLabels
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -24,7 +30,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #ShowDataLabels
         }
 
-        static void SetDataLabelsPosition(Workbook workbook) {
+        static void SetDataLabelsPosition(Workbook workbook)
+        {
             #region #SetDataLabelsPosition
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -41,7 +48,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #SetDataLabelsPosition
         }
 
-        static void DataLabelsNumberFormat(Workbook workbook) {
+        static void DataLabelsNumberFormat(Workbook workbook)
+        {
             #region #DataLabelsNumberFormat
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -62,7 +70,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #DataLabelsNumberFormat
         }
 
-        static void DataLabelsPerSeries(Workbook workbook) {
+        static void DataLabelsPerSeries(Workbook workbook)
+        {
             #region #DataLabelsPerSeries
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -79,7 +88,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #DataLabelsPerSeries
         }
 
-        static void DataLabelsPerPoint(Workbook workbook) {
+        static void DataLabelsPerPoint(Workbook workbook)
+        {
             #region #DataLabelsPerPoint
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -96,7 +106,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #DataLabelsPerPoint
         }
 
-        static void DataLabelsSeparator(Workbook workbook) {
+        static void DataLabelsSeparator(Workbook workbook)
+        {
             #region #DataLabelsSeparator
             Worksheet worksheet = workbook.Worksheets["chartTask1"];
             workbook.Worksheets.ActiveWorksheet = worksheet;

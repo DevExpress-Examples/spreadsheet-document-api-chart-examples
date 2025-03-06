@@ -1,19 +1,20 @@
-﻿Imports System
-Imports System.Drawing
-Imports System.Globalization
-Imports DevExpress.Spreadsheet
+﻿Imports DevExpress.Spreadsheet
 Imports DevExpress.Spreadsheet.Charts
-Imports DevExpress.Spreadsheet.Drawings
-Imports DevExpress.Utils
 
 Namespace SpreadsheetChartAPIActions
     Public NotInheritable Class TitlesActions
-
         Private Sub New()
         End Sub
 
+        Public Shared ShowChartTitleAction As Action(Of Workbook) = AddressOf ShowChartTitle
+        Public Shared SetChartTitleTextAction As Action(Of Workbook) = AddressOf SetChartTitleText
+        Public Shared LinkChartTitleToCellRangeAction As Action(Of Workbook) = AddressOf LinkChartTitleToCellRange
+        Public Shared ShowAxisTitleAction As Action(Of Workbook) = AddressOf ShowAxisTitle
+        Public Shared SetAxisTitleTextAction As Action(Of Workbook) = AddressOf SetAxisTitleText
+        Public Shared LinkAxisTitleToCellRangeAction As Action(Of Workbook) = AddressOf LinkAxisTitleToCellRange
+
         Private Shared Sub ShowChartTitle(ByVal workbook As Workbook)
-            '            #Region "#ShowChartTitle"
+#Region "#ShowChartTitle"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask2")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -29,11 +30,11 @@ Namespace SpreadsheetChartAPIActions
             ' Specify that each data point in the series has a different color.
             chart.Views(0).VaryColors = True
 
-            '            #End Region ' #ShowChartTitle
+#End Region ' #ShowChartTitle
         End Sub
 
         Private Shared Sub SetChartTitleText(ByVal workbook As Workbook)
-            '            #Region "#SetChartTitleText"
+#Region "#SetChartTitleText"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask2")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -51,11 +52,11 @@ Namespace SpreadsheetChartAPIActions
             ' Specify that each data point in the series has a different color.
             chart.Views(0).VaryColors = True
 
-            '            #End Region ' #SetChartTitleText
+#End Region ' #SetChartTitleText
         End Sub
 
         Private Shared Sub LinkChartTitleToCellRange(ByVal workbook As Workbook)
-            '            #Region "#LinkChartTitleToCellRange"
+#Region "#LinkChartTitleToCellRange"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask2")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -73,12 +74,12 @@ Namespace SpreadsheetChartAPIActions
             ' Specify that each data point in the series has a different color.
             chart.Views(0).VaryColors = True
 
-            '            #End Region ' #LinkChartTitleToCellRange
+#End Region ' #LinkChartTitleToCellRange
         End Sub
 
 
         Private Shared Sub ShowAxisTitle(ByVal workbook As Workbook)
-            '            #Region "#ShowAxisTitle"
+#Region "#ShowAxisTitle"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask2")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -94,11 +95,11 @@ Namespace SpreadsheetChartAPIActions
             ' Specify that each data point in the series has a different color.
             chart.Views(0).VaryColors = True
 
-            '            #End Region ' #ShowAxisTitle
+#End Region ' #ShowAxisTitle
         End Sub
 
         Private Shared Sub SetAxisTitleText(ByVal workbook As Workbook)
-            '            #Region "#SetAxisTitleText"
+#Region "#SetAxisTitleText"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask2")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -115,11 +116,11 @@ Namespace SpreadsheetChartAPIActions
             ' Specify that each data point in the series has a different color.
             chart.Views(0).VaryColors = True
 
-            '            #End Region ' #SetAxisTitleText
+#End Region ' #SetAxisTitleText
         End Sub
 
         Private Shared Sub LinkAxisTitleToCellRange(ByVal workbook As Workbook)
-            '            #Region "#LinkAxisTitleToCellRange"
+#Region "#LinkAxisTitleToCellRange"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask2")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -136,7 +137,7 @@ Namespace SpreadsheetChartAPIActions
             ' Specify that each data point in the series has a different color.
             chart.Views(0).VaryColors = True
 
-            '            #End Region ' #LinkAxisTitleToCellRange
+#End Region ' #LinkAxisTitleToCellRange
         End Sub
     End Class
 End Namespace

@@ -12,8 +12,14 @@ Namespace SpreadsheetChartAPIActions
         Private Sub New()
         End Sub
 
+        Public Shared SetChartStyleAction As Action(Of Workbook) = AddressOf SetChartStyle
+        Public Shared SetChartFontAction As Action(Of Workbook) = AddressOf SetChartFont
+        Public Shared CustomSeriesColorAction As Action(Of Workbook) = AddressOf CustomSeriesColor
+        Public Shared TransparencyAction As Action(Of Workbook) = AddressOf Transparency
+
+
         Private Shared Sub SetChartStyle(ByVal workbook As Workbook)
-            '            #Region "#SetChartStyle"
+#Region "#SetChartStyle"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -24,12 +30,11 @@ Namespace SpreadsheetChartAPIActions
 
             ' Set the chart style.
             chart.Style = ChartStyle.Accent1Dark
-
-            '            #End Region ' #SetChartStyle
+#End Region ' #SetChartStyle
         End Sub
 
         Private Shared Sub SetChartFont(ByVal workbook As Workbook)
-            '            #Region "#SetChartFont"
+#Region "#SetChartFont"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -42,12 +47,11 @@ Namespace SpreadsheetChartAPIActions
             chart.Font.Name = "Segoe Script"
             chart.Font.Bold = True
             chart.Font.Color = Color.Navy
-
-            '            #End Region ' #SetChartFont
+#End Region ' #SetChartFont
         End Sub
 
         Private Shared Sub CustomSeriesColor(ByVal workbook As Workbook)
-            '            #Region "#CustomSeriesColor"
+#Region "#CustomSeriesColor"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -59,12 +63,11 @@ Namespace SpreadsheetChartAPIActions
             ' Change the series colors.
             chart.Series(0).Fill.SetSolidFill(Color.FromArgb(&H66, &HFF, &H66))
             chart.Series(1).Fill.SetSolidFill(Color.FromArgb(&HFF, &HFF, &H33))
-
-            '            #End Region ' #CustomSeriesColor
+#End Region ' #CustomSeriesColor
         End Sub
 
         Private Shared Sub Transparency(ByVal workbook As Workbook)
-            '            #Region "#Transparency"
+#Region "#Transparency"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask4")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -105,8 +108,7 @@ Namespace SpreadsheetChartAPIActions
             axis.Scaling.AutoMin = False
             axis.Scaling.Max = 390
             axis.Scaling.Min = 270
-
-            '            #End Region ' #Transparency
+#End Region ' #Transparency
         End Sub
     End Class
 End Namespace

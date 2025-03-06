@@ -1,15 +1,17 @@
-﻿using System;
-using System.Drawing;
-using System.Globalization;
-using DevExpress.Spreadsheet;
+﻿using DevExpress.Spreadsheet;
 using DevExpress.Spreadsheet.Charts;
 using DevExpress.Spreadsheet.Drawings;
-using DevExpress.Utils;
+using System;
+using System.Drawing;
 
 namespace SpreadsheetChartAPIActions
 {
     public static class TrendlineActions
     {
+        public static Action<Workbook> TrendlinesAction = Trendlines;
+        public static Action<Workbook> TrendlineCustomizationAction = TrendlineCustomization;
+        public static Action<Workbook> TrendlineLabelAction = TrendlineLabel;
+
         static void Trendlines(Workbook workbook)
         {
             #region #Trendlines

@@ -1,20 +1,27 @@
-﻿Imports System
-Imports System.Drawing
-Imports System.Globalization
-Imports DevExpress.Spreadsheet
+﻿Imports DevExpress.Spreadsheet
 Imports DevExpress.Spreadsheet.Charts
-Imports DevExpress.Spreadsheet.Drawings
-Imports DevExpress.Utils
-Imports System.Windows.Forms
 
 Namespace SpreadsheetChartAPIActions
-    Public NotInheritable Class Charts
+    Public NotInheritable Class ChartActions
 
         Private Sub New()
         End Sub
 
+        Public Shared CreateBarChartAction As Action(Of Workbook) = AddressOf BarChart
+        Public Shared CreateBubbleChartAction As Action(Of Workbook) = AddressOf BubbleChart
+        Public Shared CreateColumnChartAction As Action(Of Workbook) = AddressOf ColumnChart
+        Public Shared CreateComplexChartAction As Action(Of Workbook) = AddressOf ComplexChart
+        Public Shared CreateDoughnutChartAction As Action(Of Workbook) = AddressOf DoughnutChart
+        Public Shared CreatePieChartAction As Action(Of Workbook) = AddressOf PieChart
+        Public Shared CreatePie3dChartAction As Action(Of Workbook) = AddressOf Pie3dChart
+        Public Shared CreatePieOfPieChartAction As Action(Of Workbook) = AddressOf PieOfPieChart
+        Public Shared CreateScatterChartAction As Action(Of Workbook) = AddressOf ScatterChart
+        Public Shared CreateStockChartAction As Action(Of Workbook) = AddressOf StockChart
+        Public Shared ChangeChartTypeAction As Action(Of Workbook) = AddressOf ChangeChartType
+
+
         Private Shared Sub PieChart(ByVal workbook As Workbook)
-            '            #Region "#PieChart"
+#Region "#PieChart"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask1")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -38,11 +45,11 @@ Namespace SpreadsheetChartAPIActions
             dataLabels.ShowPercent = True
             dataLabels.Separator = ControlChars.Lf
 
-            '            #End Region ' #PieChart
+#End Region ' #PieChart
         End Sub
 
         Private Shared Sub BarChart(ByVal workbook As Workbook)
-            '            #Region "#BarChart"
+#Region "#BarChart"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask2")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -67,11 +74,11 @@ Namespace SpreadsheetChartAPIActions
             ' Set major unit of the value axis
             chart.PrimaryAxes(1).MajorUnit = 0.2
 
-            '            #End Region ' #BarChart
+#End Region ' #BarChart
         End Sub
 
         Private Shared Sub ColumnChart(ByVal workbook As Workbook)
-            '            #Region "#ColumnChart"
+#Region "#ColumnChart"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -113,11 +120,11 @@ Namespace SpreadsheetChartAPIActions
             ' Set the chart style
             chart.Style = ChartStyle.ColorGradient
 
-            '            #End Region ' #ColumnChart
+#End Region ' #ColumnChart
         End Sub
 
         Private Shared Sub ComplexChart(ByVal workbook As Workbook)
-            '            #Region "#ComplexChart"
+#Region "#ComplexChart"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask5")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -139,11 +146,11 @@ Namespace SpreadsheetChartAPIActions
             ' Set the position of the legend
             chart.Legend.Position = LegendPosition.Bottom
 
-            '            #End Region ' #ComplexChart
+#End Region ' #ComplexChart
         End Sub
 
         Private Shared Sub DoughnutChart(ByVal workbook As Workbook)
-            '            #Region "#DoughnutChart"
+#Region "#DoughnutChart"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -165,11 +172,11 @@ Namespace SpreadsheetChartAPIActions
             ' Display the data labels
             chart.Views(0).DataLabels.ShowPercent = True
 
-            '            #End Region ' #DoughnutChart
+#End Region ' #DoughnutChart
         End Sub
 
         Private Shared Sub Pie3dChart(ByVal workbook As Workbook)
-            '            #Region "#Pie3dChart"
+#Region "#Pie3dChart"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -190,11 +197,11 @@ Namespace SpreadsheetChartAPIActions
             ' Set the chart style
             chart.Style = ChartStyle.ColorGradient
 
-            '            #End Region ' #Pie3dChart
+#End Region ' #Pie3dChart
         End Sub
 
         Private Shared Sub ScatterChart(ByVal workbook As Workbook)
-            '            #Region "#ScatterChart"
+#Region "#ScatterChart"
             Dim worksheet As Worksheet = workbook.Worksheets("chartScatter")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -222,11 +229,11 @@ Namespace SpreadsheetChartAPIActions
             axis.Scaling.Min = -50.0
             axis.MajorUnit = 10.0
 
-            '            #End Region ' #ScatterChart
+#End Region ' #ScatterChart
         End Sub
 
         Private Shared Sub StockChart(ByVal workbook As Workbook)
-            '            #Region "#StockChart"
+#Region "#StockChart"
             Dim worksheet As Worksheet = workbook.Worksheets("chartStock")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -258,10 +265,10 @@ Namespace SpreadsheetChartAPIActions
             axis.Title.Visible = True
             axis.Title.SetValue("Price in USD")
 
-            '            #End Region ' #StockChart
+#End Region ' #StockChart
         End Sub
         Private Shared Sub BubbleChart(ByVal workbook As Workbook)
-            '            #Region "#BubbleChart"
+#Region "#BubbleChart"
             Dim worksheet As Worksheet = workbook.Worksheets("chartBubble")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -293,11 +300,11 @@ Namespace SpreadsheetChartAPIActions
             axis.Scaling.Max = 82
             axis.Scaling.AutoMin = False
             axis.Scaling.Min = 64
-            '            #End Region ' #BubbleChart
+#End Region ' #BubbleChart
         End Sub
 
         Private Shared Sub ChangeChartType(ByVal workbook As Workbook)
-            '            #Region "#ChangeChartType"
+#Region "#ChangeChartType"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask1")
             workbook.Worksheets.ActiveWorksheet = worksheet
             Dim type1 As ChartType = ChartType.LineMarker
@@ -315,7 +322,26 @@ Namespace SpreadsheetChartAPIActions
                 MessageBox.Show(e.Message, "Incompatible chart type")
                 chart.ChangeType(type2)
             End Try
-            '            #End Region ' #ChangeChartType
+#End Region ' #ChangeChartType
+        End Sub
+
+        Private Shared Sub PieOfPieChart(ByVal workbook As Workbook)
+#Region "#PieOfPieChart"
+            Dim worksheet As Worksheet = workbook.Worksheets("chartTask6")
+            workbook.Worksheets.ActiveWorksheet = worksheet
+
+            ' Create a Pie of Pie chart and specify its position.
+            Dim chart As Chart = worksheet.Charts.Add(ChartType.PieOfPie, worksheet("B2:C11"))
+            chart.TopLeftCell = worksheet.Cells("E2")
+            chart.BottomRightCell = worksheet.Cells("L16")
+
+            ' Specify the number of data points to be displayed in the secondary chart (the last four values).
+            chart.Views(0).SplitType = OfPieSplitType.Position
+            chart.Views(0).SplitPosition = 4
+
+            ' Show data labels as percentage values.
+            chart.Views(0).DataLabels.ShowPercent = True
+#End Region ' #PieOfPieChart
         End Sub
     End Class
 End Namespace

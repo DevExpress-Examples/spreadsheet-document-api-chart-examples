@@ -1,14 +1,21 @@
-﻿using System;
-using System.Drawing;
-using System.Globalization;
-using DevExpress.Spreadsheet;
+﻿using DevExpress.Spreadsheet;
 using DevExpress.Spreadsheet.Charts;
-using DevExpress.Spreadsheet.Drawings;
-using DevExpress.Utils;
+using System;
 
-namespace SpreadsheetChartAPIActions {
-    public static class TitlesActions {
-        static void ShowChartTitle(Workbook workbook) {
+namespace SpreadsheetChartAPIActions
+{
+    public static class TitlesActions
+    {
+        public static Action<Workbook> ShowChartTitleAction = ShowChartTitle;
+        public static Action<Workbook> SetChartTitleTextAction = SetChartTitleText;
+        public static Action<Workbook> LinkChartTitleToCellRangeAction = LinkChartTitleToCellRange;
+        public static Action<Workbook> ShowAxisTitleAction = ShowAxisTitle;
+        public static Action<Workbook> SetAxisTitleTextAction = SetAxisTitleText;
+        public static Action<Workbook> LinkAxisTitleToCellRangeAction = LinkAxisTitleToCellRange;
+
+
+        static void ShowChartTitle(Workbook workbook)
+        {
             #region #ShowChartTitle
             Worksheet worksheet = workbook.Worksheets["chartTask2"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -28,7 +35,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #ShowChartTitle
         }
 
-        static void SetChartTitleText(Workbook workbook) {
+        static void SetChartTitleText(Workbook workbook)
+        {
             #region #SetChartTitleText
             Worksheet worksheet = workbook.Worksheets["chartTask2"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -50,7 +58,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #SetChartTitleText
         }
 
-        static void LinkChartTitleToCellRange(Workbook workbook) {
+        static void LinkChartTitleToCellRange(Workbook workbook)
+        {
             #region #LinkChartTitleToCellRange
             Worksheet worksheet = workbook.Worksheets["chartTask2"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -73,7 +82,8 @@ namespace SpreadsheetChartAPIActions {
         }
 
 
-        static void ShowAxisTitle(Workbook workbook) {
+        static void ShowAxisTitle(Workbook workbook)
+        {
             #region #ShowAxisTitle
             Worksheet worksheet = workbook.Worksheets["chartTask2"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -93,7 +103,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #ShowAxisTitle
         }
 
-        static void SetAxisTitleText(Workbook workbook) {
+        static void SetAxisTitleText(Workbook workbook)
+        {
             #region #SetAxisTitleText
             Worksheet worksheet = workbook.Worksheets["chartTask2"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -114,7 +125,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #SetAxisTitleText
         }
 
-        static void LinkAxisTitleToCellRange(Workbook workbook) {
+        static void LinkAxisTitleToCellRange(Workbook workbook)
+        {
             #region #LinkAxisTitleToCellRange
             Worksheet worksheet = workbook.Worksheets["chartTask2"];
             workbook.Worksheets.ActiveWorksheet = worksheet;

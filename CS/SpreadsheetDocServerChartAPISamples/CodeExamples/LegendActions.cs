@@ -1,14 +1,16 @@
-﻿using System;
-using System.Drawing;
-using System.Globalization;
-using DevExpress.Spreadsheet;
+﻿using DevExpress.Spreadsheet;
 using DevExpress.Spreadsheet.Charts;
-using DevExpress.Spreadsheet.Drawings;
-using DevExpress.Utils;
+using System;
 
-namespace SpreadsheetChartAPIActions {
-    public static class LegendActions {
-        static void HideLegend(Workbook workbook) {
+namespace SpreadsheetChartAPIActions
+{
+    public static class LegendActions
+    {
+        public static Action<Workbook> HideLegendAction = HideLegend;
+        public static Action<Workbook> SetLegendPositionAction = SetLegendPosition;
+        public static Action<Workbook> ExcludeLegendEntryAction = ExcludeLegendEntry;
+        static void HideLegend(Workbook workbook)
+        {
             #region #HideLegend
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -24,7 +26,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #HideLegend
         }
 
-        static void SetLegendPosition(Workbook workbook) {
+        static void SetLegendPosition(Workbook workbook)
+        {
             #region #SetLegendPosition
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -40,7 +43,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #SetLegendPosition
         }
 
-        static void ExcludeLegendEntry(Workbook workbook) {
+        static void ExcludeLegendEntry(Workbook workbook)
+        {
             #region #ExcludeLegendEntry
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;

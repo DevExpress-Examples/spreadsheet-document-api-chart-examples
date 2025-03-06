@@ -1,14 +1,12 @@
-﻿using System;
-using System.Drawing;
-using System.Globalization;
-using DevExpress.Spreadsheet;
+﻿using DevExpress.Spreadsheet;
 using DevExpress.Spreadsheet.Charts;
-using DevExpress.Spreadsheet.Drawings;
-using DevExpress.Utils;
 
-namespace SpreadsheetChartAPIActions {
-    public static class AxesActions {
-        static void MinAndMaxValues(Workbook workbook) {
+namespace SpreadsheetChartAPIActions
+{
+    public static class AxesActions
+    {
+        static void MinAndMaxValues(Workbook workbook)
+        {
             #region #MinAndMaxValues
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -31,7 +29,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #MinAndMaxValues
         }
 
-        static void MajorUnits(Workbook workbook) {
+        static void MajorUnits(Workbook workbook)
+        {
             #region #MajorUnits
             Worksheet worksheet = workbook.Worksheets["chartTask2"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -45,14 +44,15 @@ namespace SpreadsheetChartAPIActions {
 
             // Set the major unit of the value axis.
             chart.PrimaryAxes[1].MajorUnit = 0.2;
-            
+
             // Hide the legend.
             chart.Legend.Visible = false;
 
             #endregion #MajorUnits
         }
 
-        static void MajorAndMinorGridlines(Workbook workbook) {
+        static void MajorAndMinorGridlines(Workbook workbook)
+        {
             #region #MajorAndMinorGridlines
             Worksheet worksheet = workbook.Worksheets["chartTask5"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -73,7 +73,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #MajorAndMinorGridlines
         }
 
-        static void LabelsNumberFormat(Workbook workbook) {
+        static void LabelsNumberFormat(Workbook workbook)
+        {
             #region #LabelsNumberFormat
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -94,7 +95,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #LabelsNumberFormat
         }
 
-        static void HideTickMarks(Workbook workbook) {
+        static void HideTickMarks(Workbook workbook)
+        {
             #region #HideTickMarks
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -116,7 +118,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #HideTickMarks
         }
 
-        static void HideAxisLine(Workbook workbook) {
+        static void HideAxisLine(Workbook workbook)
+        {
             #region #HideAxisLine
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -135,7 +138,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #HideAxisLine
         }
 
-        static void Position(Workbook workbook) {
+        static void Position(Workbook workbook)
+        {
             #region #AxisPosition
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -154,7 +158,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #AxisPosition
         }
 
-        static void Orientation(Workbook workbook) {
+        static void Orientation(Workbook workbook)
+        {
             #region #AxisOrientation
             Worksheet worksheet = workbook.Worksheets["chartTask3"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
@@ -173,7 +178,8 @@ namespace SpreadsheetChartAPIActions {
             #endregion #AxisOrientation
         }
 
-        static void LogScale(Workbook workbook) {
+        static void LogScale(Workbook workbook)
+        {
             #region #LogScale
             Worksheet worksheet = workbook.Worksheets["chartTask5"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
