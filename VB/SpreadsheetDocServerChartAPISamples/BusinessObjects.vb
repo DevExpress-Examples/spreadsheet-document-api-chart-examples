@@ -3,7 +3,7 @@ Imports DevExpress.XtraTreeList
 Imports System
 Imports System.ComponentModel
 
-Namespace SpreadsheetDocServerChartAPISamples
+Namespace SpreadsheetChartAPISamples
 	Public Class SpreadsheetNode
 		Private _groups As New GroupsOfSpreadsheetExamples()
 		Private _owner As GroupsOfSpreadsheetExamples

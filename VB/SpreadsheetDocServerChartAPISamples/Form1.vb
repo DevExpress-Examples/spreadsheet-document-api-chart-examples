@@ -1,7 +1,5 @@
 ﻿Imports System.Windows.Forms
 Imports DevExpress.Spreadsheet
-Imports SpreadsheetChartAPIActions
-Imports SpreadsheetDocServerChartAPISamples
 
 
 Namespace SpreadsheetChartAPISamples
