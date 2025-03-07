@@ -19,7 +19,7 @@ The application form contains the list of supported operations. A user can selec
 | C# | Visual Basic |
 |---|---|
 | [AxesActions.cs](./CS/SpreadsheetDocServerChartAPISamples/CodeExamples/AxesActions.cs) | [AxesActions.vb](./VB/SpreadsheetDocServerChartAPISamples/CodeExamples/AxesActions.vb)  |
-| [ChartActions.cs](./CS/SpreadsheetDocServerChartAPISamples/CodeExamples/ChartsActions.cs) | [ChartActions.vb](./VB/SpreadsheetDocServerChartAPISamples/CodeExamples/ChartActions.vb) |
+| [ChartActions.cs](./CS/SpreadsheetDocServerChartAPISamples/CodeExamples/ChartActions.cs) | [ChartActions.vb](./VB/SpreadsheetDocServerChartAPISamples/CodeExamples/ChartActions.vb) |
 | [CreationAndDataActions.cs](./CS/SpreadsheetDocServerChartAPISamples/CodeExamples/CreationAndDataActions.cs) | [CreationAndDataActions.vb](./VB/SpreadsheetDocServerChartAPISamples/CodeExamples/CreationAndDataActions.vb) |
 | [DataLabelsActions.cs](./CS/SpreadsheetDocServerChartAPISamples/CodeExamples/DataLabelsActions.cs) | [DataLabelsActions.vb](./VB/SpreadsheetDocServerChartAPISamples/CodeExamples/DataLabelsActions.vb) |
 | [LegendActions.cs](./CS/SpreadsheetDocServerChartAPISamples/CodeExamples/LegendActions.cs) | [LegendActions.vb](./VB/SpreadsheetDocServerChartAPISamples/CodeExamples/LegendActions.vb) |
