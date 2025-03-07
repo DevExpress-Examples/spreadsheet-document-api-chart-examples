@@ -1,4 +1,3 @@
-﻿using DevExpress.Charts.Model;
 using DevExpress.Spreadsheet;
 using DevExpress.Spreadsheet.Charts;
 using System;
