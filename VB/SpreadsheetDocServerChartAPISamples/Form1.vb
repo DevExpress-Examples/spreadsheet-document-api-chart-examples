@@ -1,4 +1,5 @@
-﻿Imports DevExpress.Spreadsheet
+﻿Imports System.Windows.Forms
+Imports DevExpress.Spreadsheet
 Imports SpreadsheetChartAPIActions
 Imports SpreadsheetDocServerChartAPISamples
 
@@ -30,34 +31,34 @@ Namespace SpreadsheetChartAPISamples
         End Sub
 
         Private Sub InitData(ByVal examples As GroupsOfSpreadsheetExamples)
-			#Region "GroupNodes        "
-			examples.Add(New SpreadsheetNode("Chart Axes"))
-			examples.Add(New SpreadsheetNode("Create Charts"))
-			examples.Add(New SpreadsheetNode("Chart Data"))
-			examples.Add(New SpreadsheetNode("Data Labels"))
-			examples.Add(New SpreadsheetNode("Chart Legends"))
-			examples.Add(New SpreadsheetNode("Protection"))
-			examples.Add(New SpreadsheetNode("Chart Series"))
-			examples.Add(New SpreadsheetNode("Sparklines"))
-			examples.Add(New SpreadsheetNode("Chart Styles"))
-			examples.Add(New SpreadsheetNode("Chart Titles"))
-			examples.Add(New SpreadsheetNode("Trendlines"))
-			examples.Add(New SpreadsheetNode("View Options"))
-			#End Region
+#Region "GroupNodes        "
+            examples.Add(New SpreadsheetNode("Chart Axes"))
+            examples.Add(New SpreadsheetNode("Create Charts"))
+            examples.Add(New SpreadsheetNode("Chart Data"))
+            examples.Add(New SpreadsheetNode("Data Labels"))
+            examples.Add(New SpreadsheetNode("Chart Legends"))
+            examples.Add(New SpreadsheetNode("Protection"))
+            examples.Add(New SpreadsheetNode("Chart Series"))
+            examples.Add(New SpreadsheetNode("Sparklines"))
+            examples.Add(New SpreadsheetNode("Chart Styles"))
+            examples.Add(New SpreadsheetNode("Chart Titles"))
+            examples.Add(New SpreadsheetNode("Trendlines"))
+            examples.Add(New SpreadsheetNode("View Options"))
+#End Region
 
-			#Region "ExampleNodes"
-			' Add nodes to the "Axes" group of examples.
-			examples(0).Groups.Add(New SpreadsheetExample("Min and Max Values", AxesActions.MinAndMaxValuesAction))
-			examples(0).Groups.Add(New SpreadsheetExample("Major Units", AxesActions.MajorUnitsAction))
-			examples(0).Groups.Add(New SpreadsheetExample("Major and Minor Gridlines", AxesActions.MajorAndMinorGridlinesAction))
-			examples(0).Groups.Add(New SpreadsheetExample("Labels Number Format", AxesActions.LabelsNumberFormatAction))
-			examples(0).Groups.Add(New SpreadsheetExample("Hide Tick Marks", AxesActions.HideTickMarksAction))
-			examples(0).Groups.Add(New SpreadsheetExample("Hide Axis Line", AxesActions.HideAxisLineAction))
-			examples(0).Groups.Add(New SpreadsheetExample("Axis Position", AxesActions.PositionAction))
-			examples(0).Groups.Add(New SpreadsheetExample("Axis Orientation", AxesActions.OrientationAction))
-			examples(0).Groups.Add(New SpreadsheetExample("Log Scale", AxesActions.LogScaleAction))
-			examples(0).Groups.Add(New SpreadsheetExample("Display Units", AxesActions.DisplayUnitsAction))            
-            
+#Region "ExampleNodes"
+            ' Add nodes to the "Axes" group of examples.
+            examples(0).Groups.Add(New SpreadsheetExample("Min and Max Values", AxesActions.MinAndMaxValuesAction))
+            examples(0).Groups.Add(New SpreadsheetExample("Major Units", AxesActions.MajorUnitsAction))
+            examples(0).Groups.Add(New SpreadsheetExample("Major and Minor Gridlines", AxesActions.MajorAndMinorGridlinesAction))
+            examples(0).Groups.Add(New SpreadsheetExample("Labels Number Format", AxesActions.LabelsNumberFormatAction))
+            examples(0).Groups.Add(New SpreadsheetExample("Hide Tick Marks", AxesActions.HideTickMarksAction))
+            examples(0).Groups.Add(New SpreadsheetExample("Hide Axis Line", AxesActions.HideAxisLineAction))
+            examples(0).Groups.Add(New SpreadsheetExample("Axis Position", AxesActions.PositionAction))
+            examples(0).Groups.Add(New SpreadsheetExample("Axis Orientation", AxesActions.OrientationAction))
+            examples(0).Groups.Add(New SpreadsheetExample("Log Scale", AxesActions.LogScaleAction))
+            examples(0).Groups.Add(New SpreadsheetExample("Display Units", AxesActions.DisplayUnitsAction))
+
             ' Add nodes to the "Create Charts" group of examples.
             examples(1).Groups.Add(New SpreadsheetExample("Create Bar Chart", ChartActions.CreateBarChartAction))
             examples(1).Groups.Add(New SpreadsheetExample("Create Bubble Chart", ChartActions.CreateBubbleChartAction))
