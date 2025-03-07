@@ -1,7 +1,7 @@
 ﻿Imports DevExpress.Spreadsheet
 Imports DevExpress.Spreadsheet.Charts
 
-Namespace SpreadsheetChartAPIActions
+Namespace SpreadsheetChartAPISamples
     Public NotInheritable Class SeriesActions
 
         Private Sub New()

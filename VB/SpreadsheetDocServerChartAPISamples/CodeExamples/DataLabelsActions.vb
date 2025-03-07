@@ -6,7 +6,7 @@ Imports DevExpress.Spreadsheet.Charts
 Imports DevExpress.Spreadsheet.Drawings
 Imports DevExpress.Utils
 
-Namespace SpreadsheetChartAPIActions
+Namespace SpreadsheetChartAPISamples
     Public NotInheritable Class DataLabelActions
 
         Private Sub New()

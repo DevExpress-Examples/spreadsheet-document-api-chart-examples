@@ -6,25 +6,25 @@ Imports DevExpress.Spreadsheet.Charts
 Imports DevExpress.Spreadsheet.Drawings
 Imports DevExpress.Utils
 
-Namespace SpreadsheetChartAPIActions
+Namespace SpreadsheetChartAPISamples
     Public NotInheritable Class AxesActions
 
         Private Sub New()
         End Sub
-        
-		Public Shared MinAndMaxValuesAction As Action(Of Workbook) = MinAndMaxValues
-		Public Shared MajorUnitsAction As Action(Of Workbook) = MajorUnits
-		Public Shared MajorAndMinorGridlinesAction As Action(Of Workbook) = MajorAndMinorGridlines
-		Public Shared LabelsNumberFormatAction As Action(Of Workbook) = LabelsNumberFormat
-		Public Shared HideTickMarksAction As Action(Of Workbook) = HideTickMarks
-		Public Shared HideAxisLineAction As Action(Of Workbook) = HideAxisLine
-		Public Shared PositionAction As Action(Of Workbook) = Position
-		Public Shared OrientationAction As Action(Of Workbook) = Orientation
-		Public Shared LogScaleAction As Action(Of Workbook) = LogScale
-		Public Shared DisplayUnitsAction As Action(Of Workbook) = DisplayUnits
+
+        Public Shared MinAndMaxValuesAction As Action(Of Workbook) = AddressOf MinAndMaxValues
+        Public Shared MajorUnitsAction As Action(Of Workbook) = AddressOf MajorUnits
+        Public Shared MajorAndMinorGridlinesAction As Action(Of Workbook) = AddressOf MajorAndMinorGridlines
+        Public Shared LabelsNumberFormatAction As Action(Of Workbook) = AddressOf LabelsNumberFormat
+        Public Shared HideTickMarksAction As Action(Of Workbook) = AddressOf HideTickMarks
+        Public Shared HideAxisLineAction As Action(Of Workbook) = AddressOf HideAxisLine
+        Public Shared PositionAction As Action(Of Workbook) = AddressOf Position
+        Public Shared OrientationAction As Action(Of Workbook) = AddressOf Orientation
+        Public Shared LogScaleAction As Action(Of Workbook) = AddressOf LogScale
+        Public Shared DisplayUnitsAction As Action(Of Workbook) = AddressOf DisplayUnits
 
         Private Shared Sub MinAndMaxValues(ByVal workbook As Workbook)
-                        #Region "#MinAndMaxValues"
+#Region "#MinAndMaxValues"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -43,11 +43,11 @@ Namespace SpreadsheetChartAPIActions
             ' Hide the legend.
             chart.Legend.Visible = False
 
-                        #End Region ' #MinAndMaxValues
+#End Region ' #MinAndMaxValues
         End Sub
 
         Private Shared Sub MajorUnits(ByVal workbook As Workbook)
-                        #Region "#MajorUnits"
+#Region "#MajorUnits"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask2")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -64,11 +64,11 @@ Namespace SpreadsheetChartAPIActions
             ' Hide the legend.
             chart.Legend.Visible = False
 
-                        #End Region ' #MajorUnits
+#End Region ' #MajorUnits
         End Sub
 
         Private Shared Sub MajorAndMinorGridlines(ByVal workbook As Workbook)
-                        #Region "#MajorAndMinorGridlines"
+#Region "#MajorAndMinorGridlines"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask5")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -84,11 +84,11 @@ Namespace SpreadsheetChartAPIActions
 
             ' Hide the legend.
             chart.Legend.Visible = False
-                        #End Region ' #MajorAndMinorGridlines
+#End Region ' #MajorAndMinorGridlines
         End Sub
 
         Private Shared Sub LabelsNumberFormat(ByVal workbook As Workbook)
-                        #Region "#LabelsNumberFormat"
+#Region "#LabelsNumberFormat"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -104,11 +104,11 @@ Namespace SpreadsheetChartAPIActions
 
             ' Hide the legend.
             chart.Legend.Visible = False
-                        #End Region ' #LabelsNumberFormat
+#End Region ' #LabelsNumberFormat
         End Sub
 
         Private Shared Sub HideTickMarks(ByVal workbook As Workbook)
-                        #Region "#HideTickMarks"
+#Region "#HideTickMarks"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -126,11 +126,11 @@ Namespace SpreadsheetChartAPIActions
             ' Hide the legend.
             chart.Legend.Visible = False
 
-                        #End Region ' #HideTickMarks
+#End Region ' #HideTickMarks
         End Sub
 
         Private Shared Sub HideAxisLine(ByVal workbook As Workbook)
-                        #Region "#HideAxisLine"
+#Region "#HideAxisLine"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -145,11 +145,11 @@ Namespace SpreadsheetChartAPIActions
             ' Hide the legend.
             chart.Legend.Visible = False
 
-                        #End Region ' #HideAxisLine
+#End Region ' #HideAxisLine
         End Sub
 
         Private Shared Sub Position(ByVal workbook As Workbook)
-                        #Region "#AxisPosition"
+#Region "#AxisPosition"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -164,11 +164,11 @@ Namespace SpreadsheetChartAPIActions
             ' Hide the legend.
             chart.Legend.Visible = False
 
-                        #End Region ' #AxisPosition
+#End Region ' #AxisPosition
         End Sub
 
         Private Shared Sub Orientation(ByVal workbook As Workbook)
-                        #Region "#AxisOrientation"
+#Region "#AxisOrientation"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask3")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -183,11 +183,11 @@ Namespace SpreadsheetChartAPIActions
             ' Hide the legend.
             chart.Legend.Visible = False
 
-                        #End Region ' #AxisOrientation
+#End Region ' #AxisOrientation
         End Sub
 
         Private Shared Sub LogScale(ByVal workbook As Workbook)
-                        #Region "#LogScale"
+#Region "#LogScale"
             Dim worksheet As Worksheet = workbook.Worksheets("chartTask5")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
@@ -203,38 +203,38 @@ Namespace SpreadsheetChartAPIActions
             ' Set the position of the legend on the chart.
             chart.Legend.Position = LegendPosition.Bottom
 
-                        #End Region ' #LogScale
+#End Region ' #LogScale
         End Sub
 
         Private Shared Sub DisplayUnits(ByVal workbook As Workbook)
-                    #Region "#DisplayUnits"
-        Dim worksheet As Worksheet = workbook.Worksheets("chartTask7")
-        workbook.Worksheets.ActiveWorksheet = worksheet
+#Region "#DisplayUnits"
+            Dim worksheet As Worksheet = workbook.Worksheets("chartTask7")
+            workbook.Worksheets.ActiveWorksheet = worksheet
 
-        ' Create a chart and specify its location.
-        Dim chart As Chart = worksheet.Charts.Add(ChartType.ColumnClustered, worksheet("B2:C8"))
-        chart.TopLeftCell = worksheet.Cells("F2")
-        chart.BottomRightCell = worksheet.Cells("N17")
+            ' Create a chart and specify its location.
+            Dim chart As Chart = worksheet.Charts.Add(ChartType.ColumnClustered, worksheet("B2:C8"))
+            chart.TopLeftCell = worksheet.Cells("F2")
+            chart.BottomRightCell = worksheet.Cells("N17")
 
-        ' Change the scale of the value axis.
-        Dim axisCollection As AxisCollection = chart.PrimaryAxes
-        Dim valueAxis As Axis = axisCollection(1)
-        valueAxis.Scaling.AutoMax = False
-        valueAxis.Scaling.Max = 8000000
-        valueAxis.Scaling.AutoMin = False
-        valueAxis.Scaling.Min = 0
+            ' Change the scale of the value axis.
+            Dim axisCollection As AxisCollection = chart.PrimaryAxes
+            Dim valueAxis As Axis = axisCollection(1)
+            valueAxis.Scaling.AutoMax = False
+            valueAxis.Scaling.Max = 8000000
+            valueAxis.Scaling.AutoMin = False
+            valueAxis.Scaling.Min = 0
 
-        ' Specify display units for the value axis.
-        valueAxis.DisplayUnits.UnitType = DisplayUnitType.Thousands
-        valueAxis.DisplayUnits.ShowLabel = True
+            ' Specify display units for the value axis.
+            valueAxis.DisplayUnits.UnitType = DisplayUnitType.Thousands
+            valueAxis.DisplayUnits.ShowLabel = True
 
-        ' Set the chart style.
-        chart.Style = ChartStyle.ColorBevel
-        chart.Views(0).VaryColors = True
+            ' Set the chart style.
+            chart.Style = ChartStyle.ColorBevel
+            chart.Views(0).VaryColors = True
 
-        ' Hide the legend.
-        chart.Legend.Visible = False
-                    #End Region ' #DisplayUnits
-    End Sub
+            ' Hide the legend.
+            chart.Legend.Visible = False
+#End Region ' #DisplayUnits
+        End Sub
     End Class
 End Namespace

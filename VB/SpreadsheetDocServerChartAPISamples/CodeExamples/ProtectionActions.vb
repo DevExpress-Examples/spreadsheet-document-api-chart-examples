@@ -6,7 +6,7 @@ Imports System.Linq
 Imports System.Text
 Imports System.Threading.Tasks
 
-Namespace SpreadsheetChartAPIActions
+Namespace SpreadsheetChartAPISamples
     Public NotInheritable Class ProtectionActions
 
         Private Sub New()

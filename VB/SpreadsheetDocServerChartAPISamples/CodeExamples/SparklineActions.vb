@@ -2,7 +2,7 @@
 Imports System.Collections.Generic
 Imports System.Drawing
 
-Namespace SpreadsheetChartAPIActions
+Namespace SpreadsheetChartAPISamples
     Public NotInheritable Class SparklineActions
         Private Sub New()
         End Sub
