@@ -39,7 +39,7 @@ You can modify the code and watch the result. If an error occurs during compilat
 * [Spreadsheet Charts](https://docs.devexpress.com/OfficeFileAPI/120427/spreadsheet-document-api/charts-and-graphics/charting)
 * [Spreadsheet Chart Examples](https://docs.devexpress.com/OfficeFileAPI/113732/spreadsheet-document-api/examples/charts)
 <!-- feedback -->
-## Does this example address your development requirements/objectives?
+## Does This Example Address Your Development Requirements/Objectives?
 
 [<img src="https://www.devexpress.com/support/examples/i/yes-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=spreadsheet-document-api-chart-examples&~~~was_helpful=yes) [<img src="https://www.devexpress.com/support/examples/i/no-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=spreadsheet-document-api-chart-examples&~~~was_helpful=no)
 
